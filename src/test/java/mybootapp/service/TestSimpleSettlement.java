@@ -10,6 +10,7 @@ import java.util.Optional;
 import java.util.Set;
 
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,20 +29,40 @@ import mybootapp.model.Person;
 @ContextConfiguration(classes = Starter.class)
 
 public class TestSimpleSettlement {
-
-    @Autowired
-    private GroupRepository groupRepository;
+	
+    //@Autowired
+    //@Qualifier("simpleSettlementBean")
+    private SimpleSettlement ss = new SimpleSettlement();
     
-    @Autowired
-    private PersonRepository personRepository;
+	@Autowired
+	PersonRepository personRepository;
+	
+	@Autowired
+	GroupRepository groupRepository;
     
-    @Autowired
-    private SimpleSettlement ss;
-    
+	/*
+	 * Do not respect the single test guidelines but fuck JEE that shit ain't working 
+	 */
     @Test
     public void testSettlement() {
-    	ss.settle(100, 100);
-    	assertEquals(100, groupRepository.count());
-    	assertEquals(100, personRepository.count());
+    	int size = 1000;
+    	//test settlement
+    	ss.settle(size, size);
+    	assertEquals(size, ss.getGroups().size());
+    	assertEquals(size, ss.getPersons().size());
+    	personRepository.saveAll(ss.getPersons());
+    	groupRepository.saveAll(ss.getGroups());
+    	assertEquals(size, personRepository.count());
+    	assertEquals(size, groupRepository.count());
+    	
+    	//test association
+    	ss.associate();
+    	groupRepository.saveAll(ss.getGroups());
+    	assertEquals(size, personRepository.count());
+    	assertEquals(size, groupRepository.count());
+    	List<Groups> groups = groupRepository.findAll();
+    	for(int i = 0; i<ss.getGroups().size(); i++) {
+    		assertEquals(ss.getGroups().get(i).getPersons().size(), groups.get(i).getPersons().size());
+    	}
     }
 }
