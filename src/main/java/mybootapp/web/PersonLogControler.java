@@ -27,7 +27,7 @@ import mybootapp.manager.User;
 
 @Controller
 
-public class PersonControler {
+public class PersonLogControler {
 	
 	@Autowired 
 	User user; 
