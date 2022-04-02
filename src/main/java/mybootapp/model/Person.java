@@ -70,27 +70,4 @@ public class Person implements Serializable {
     	this.birthDay = birthDay;
     	this.password = password;
     }
-    //public Person() {}
-    
-    @ManyToMany(fetch = FetchType.LAZY//, cascade = { CascadeType.MERGE, CascadeType.PERSIST }
-    	      )
-    	   @JoinTable(
-    	      name = "Person_Group",
-    	      joinColumns = { @JoinColumn(name = "id_person") },
-    	      inverseJoinColumns = { @JoinColumn(name = "id_group") }
-    	      )
-    	   @ToString.Exclude
-    	   Set<Groups> Groups;
-
-    	   public void addGroup(Groups group) {
-    	      if (Groups == null) Groups = new HashSet<>();
-    	      Groups.size();
-    	      Groups.add(group);
-    	   }
-    	   public void removeGroup(Groups group) {
-     	      if (Groups == null) return;
-     	      Groups.size();
-     	      Groups.remove(group);
-     	   }
-
 }

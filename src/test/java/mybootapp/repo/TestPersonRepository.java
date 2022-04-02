@@ -18,6 +18,7 @@ import org.springframework.test.context.ContextConfiguration;
 
 import mybootapp.repo.PersonRepository;
 import mybootapp.web.Starter;
+import mybootapp.model.Groups;
 import mybootapp.model.Person;
 
 
@@ -26,24 +27,31 @@ import mybootapp.model.Person;
 public class TestPersonRepository {
 
     @Autowired
-    private PersonRepository dao;
+    private PersonRepository personRepository;
+    
+    @Autowired
+    private GroupRepository groupRepository;
     
     private String[] values = {"John", "Doe", "john@doe", "john.doe", "password"};
     private Date date;
     private Person p;
+    private Groups g;
     
     @BeforeEach
     public void initEach() {
     	date = new Date();
         p = new Person(values[0], values[1], values[2], values[3], date, values[4]);
-        dao.deleteAll();
-        assertFalse(dao.findAll().iterator().hasNext());
+        personRepository.deleteAll();
+        assertFalse(personRepository.findAll().iterator().hasNext());
+        g = new Groups("onlyGroup");
+        groupRepository.deleteAll();
+        assertFalse(groupRepository.findAll().iterator().hasNext());
     }
 
     @Test
     public void testAddPerson() {
-        dao.save(p);
-        var op = dao.findById(p.getId());
+        personRepository.save(p);
+        var op = personRepository.findById(p.getId());
         assertTrue(op.isPresent());
         p = op.get();
         assertEquals(values[0], p.getFirstName());
@@ -54,13 +62,12 @@ public class TestPersonRepository {
     
     @Test
     public void testRemovePerson() {
-        dao.save(p);
-        var op = dao.findById(p.getId());
+        personRepository.save(p);
+        var op = personRepository.findById(p.getId());
         assertTrue(op.isPresent());
         p = op.get();
-        dao.delete(p);
-        op = dao.findById(p.getId());
+        personRepository.delete(p);
+        op = personRepository.findById(p.getId());
         assertEquals(Optional.empty(), op);
     }
-    
 }
