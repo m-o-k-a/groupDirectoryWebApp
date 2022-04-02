@@ -37,7 +37,7 @@ public class Groups implements Serializable {
     //@Column(name = "name", length = 200, nullable = false, unique = false)
     private String name;
     
-    @ManyToMany( //fetch = FetchType.LAZY, cascade = { CascadeType.MERGE, CascadeType.PERSIST }
+    @ManyToMany( fetch = FetchType.LAZY, cascade = { CascadeType.MERGE, CascadeType.PERSIST }
   	      )
   	   @JoinTable(
   	      name = "Person_Group",
@@ -46,12 +46,21 @@ public class Groups implements Serializable {
   	      )
   	   @ToString.Exclude
   	   Set<Person> persons;
-  	  
+    
+	   public void addPerson(Person person) {
+ 	      if (persons == null) persons = new HashSet<>();
+ 	      persons.size();
+ 	      persons.add(person);
+ 	   }
+	   public void removePerson(Person person) {
+  	      if (person == null) return;
+  	      persons.size();
+  	      persons.remove(person);
+  	   }
 
     public Groups(String name) {
         this.name = name;
         this.persons = new HashSet<>();
     }
-    //public GroupOfpersons() {}
 
 }

@@ -23,22 +23,14 @@ public class SimpleSettlement implements ISettlement {
 	
 	@Autowired
 	PersonRepository personRepository;
+	
 	@Autowired
 	GroupRepository groupRepository;
-	private Random rand = new Random();
 	
-	@PostConstruct
-	public void start() {
-		settle(100, 100);
-	}
+	private Random rand = new Random();
 	
 	@Override
 	public void settle(int amountOfPerson, int amountOfGroup) {
-		//Groups Creations
-		for(int i = 0; i<amountOfGroup; i++) {
-			Groups group = new Groups("Group-"+i);
-			groupRepository.save(group);
-		}
 		for(int i = 0; i<amountOfPerson; i++) {
 			Date date = new Date();
 			Person p = new Person("FirstName"+i, 
@@ -47,21 +39,26 @@ public class SimpleSettlement implements ISettlement {
 					i+"-settlement.com",
 					date, 
 					"password"+i);
-			//personRepository.save(p);
-			//todo check this
-			//probably call to non existing ressources due to the optionnal
-			for(int j = 0; j<amountOfGroup; j++) {
+			personRepository.save(p);
+		}
+		
+		for(int i = 0; i<amountOfGroup; i++) {
+			Groups g = new Groups("Group-"+i);
+			groupRepository.save(g);
+			for(int j = 0; j<amountOfPerson; j++) {
 				if(rand.nextInt(10)%3 == 0) {
-					Optional<Groups> group = groupRepository.findById((long) i);
-					if(group.isEmpty() || group.get() == null || group.get().getName().isEmpty()) continue;
+					Optional<Person> person = personRepository.findById((long) i);
+					if(person.isEmpty() || person.get() == null || person.get().getFirstName().isEmpty()) continue;
 					//todo dirty but try to find a better way to avoid NaN or nullable values
 					try {
-						p.addGroup(group.get());
-						personRepository.save(p);
+						g.addPerson(person.get());
+						groupRepository.save(g);
 					} catch(Exception e) {}
 				}
 			}
 		}
 	}
+	
+	
 
 }

@@ -24,12 +24,14 @@ import mybootapp.model.Person;
 
 
 @SpringBootTest
-@ContextConfiguration(classes = Groups.class)
+@ContextConfiguration(classes = Starter.class)
 public class TestGroupRepository {
 
     @Autowired
-    private GroupRepository groupDao;
-    private PersonRepository personDao;
+    private GroupRepository groupRepository;
+    
+    @Autowired
+    private PersonRepository personRepository;
     
     private String[] values = {"Alpha"};
     private Date date;
@@ -39,14 +41,14 @@ public class TestGroupRepository {
     public void initEach() {
     	date = new Date();
         g = new Groups(values[0]);
-        groupDao.deleteAll();
-        assertFalse(groupDao.findAll().iterator().hasNext());
+        groupRepository.deleteAll();
+        assertFalse(groupRepository.findAll().iterator().hasNext());
     }
 
     @Test
     public void testAddGroup() {
-        groupDao.save(g);
-        var op = groupDao.findById(g.getId());
+        groupRepository.save(g);
+        var op = groupRepository.findById(g.getId());
         assertTrue(op.isPresent());
         g = op.get();
         assertEquals(values[0], g.getName());
@@ -54,26 +56,27 @@ public class TestGroupRepository {
     
     @Test
     public void testRemoveGroup() {
-        groupDao.save(g);
-        var op = groupDao.findById(g.getId());
+        groupRepository.save(g);
+        var op = groupRepository.findById(g.getId());
         assertTrue(op.isPresent());
         g = op.get();
-        groupDao.delete(g);
-        op = groupDao.findById(g.getId());
+        groupRepository.delete(g);
+        op = groupRepository.findById(g.getId());
         assertEquals(Optional.empty(), op);
     }
     
     @Test
     public void testAddToGroup() {
-        groupDao.save(g);
-        var op = groupDao.findById(g.getId());
+        groupRepository.save(g);
+        var op = groupRepository.findById(g.getId());
         assertTrue(op.isPresent());
         g = op.get();
         Person p = new Person("John", "Doe", "john@doe", "john.doe", date, "password");
-        p.addGroup(g);
-        personDao.save(p);
-        //todo update the lazy thing in group/person table
-        op = groupDao.findById(g.getId());
+        personRepository.save(p);
+        g.addPerson(p);
+        groupRepository.save(g);
+        
+        op = groupRepository.findById(g.getId());
         assertTrue(op.isPresent());
         g = op.get();
         Set<Person> lst = g.getPersons();
