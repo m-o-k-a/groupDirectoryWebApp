@@ -37,7 +37,7 @@ public class Groups implements Serializable {
     //@Column(name = "name", length = 200, nullable = false, unique = false)
     private String name;
     
-    @ManyToMany( fetch = FetchType.LAZY, cascade = { CascadeType.MERGE, CascadeType.PERSIST }
+    @ManyToMany( fetch = FetchType.EAGER, cascade = { CascadeType.MERGE, CascadeType.PERSIST }
   	      )
   	   @JoinTable(
   	      name = "Person_Group",
@@ -57,6 +57,11 @@ public class Groups implements Serializable {
   	      persons.size();
   	      persons.remove(person);
   	   }
+	   public Set<Person> getPersonsLazy() {
+	 	      if (persons == null) persons = new HashSet<>();
+	 	      persons.size();
+	 	      return persons;
+	 	   }
 
     public Groups(String name) {
         this.name = name;
