@@ -45,20 +45,21 @@ public class TestSimpleSettlement {
 	 */
     @Test
     public void testSettlement() {
+    	int size = 1000;
     	//test settlement
-    	ss.settle(100, 100);
-    	assertEquals(100, ss.getGroups().size());
-    	assertEquals(100, ss.getPersons().size());
+    	ss.settle(size, size);
+    	assertEquals(size, ss.getGroups().size());
+    	assertEquals(size, ss.getPersons().size());
     	personRepository.saveAll(ss.getPersons());
     	groupRepository.saveAll(ss.getGroups());
-    	assertEquals(100, personRepository.count());
-    	assertEquals(100, groupRepository.count());
+    	assertEquals(size, personRepository.count());
+    	assertEquals(size, groupRepository.count());
     	
     	//test association
     	ss.associate();
     	groupRepository.saveAll(ss.getGroups());
-    	assertEquals(100, personRepository.count());
-    	assertEquals(100, groupRepository.count());
+    	assertEquals(size, personRepository.count());
+    	assertEquals(size, groupRepository.count());
     	List<Groups> groups = groupRepository.findAll();
     	for(int i = 0; i<ss.getGroups().size(); i++) {
     		assertEquals(ss.getGroups().get(i).getPersons().size(), groups.get(i).getPersons().size());
