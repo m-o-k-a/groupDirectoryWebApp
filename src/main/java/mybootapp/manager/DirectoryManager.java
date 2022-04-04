@@ -6,7 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import mybootapp.repo.GroupRepository;
 import mybootapp.repo.PersonRepository;
-import mybootapp.model.Groups;
+import mybootapp.model.Group;
 import mybootapp.model.Person;
 
 public class DirectoryManager implements IDirectoryManager {
@@ -27,7 +27,7 @@ public class DirectoryManager implements IDirectoryManager {
 	}
 
 	@Override
-	public Optional<Groups> findGroup(User user, long groupId) {
+	public Optional<Group> findGroup(User user, long groupId) {
 		return groupDao.findById(groupId);
 	}
 
@@ -54,7 +54,7 @@ public class DirectoryManager implements IDirectoryManager {
 	}
 
 	@Override
-	public void saveGroup(User user, Groups g) {
+	public void saveGroup(User user, Group g) {
 		groupDao.save(g);
 	}
 

@@ -2,7 +2,7 @@ package mybootapp.manager;
 
 import java.util.Optional;
 
-import mybootapp.model.Groups;
+import mybootapp.model.Group;
 import mybootapp.model.Person;
 
 public interface IDirectoryManager {
@@ -12,7 +12,7 @@ public interface IDirectoryManager {
 	
 	Optional<Person> findPerson(User user, long personId);
 	
-	Optional<Groups> findGroup(User user, long groupId);
+	Optional<Group> findGroup(User user, long groupId);
 	
 	boolean login(User user, String mailAddress, String password);
 	
@@ -20,7 +20,7 @@ public interface IDirectoryManager {
 	
 	void savePerson(User user, Person p);
 	
-	void saveGroup(User user, Groups g);
+	void saveGroup(User user, Group g);
 	
 
 }
