@@ -10,6 +10,8 @@ import mybootapp.model.Group;
 import mybootapp.model.Person;
 
 public class DirectoryManager implements IDirectoryManager {
+	@Autowired
+	IEntityDao Dao;
 	
     @Autowired
     private PersonRepository personDao;
@@ -19,6 +21,7 @@ public class DirectoryManager implements IDirectoryManager {
 	@Override
 	public User newUser() {
 		return new User();
+		
 	}
 
 	@Override
