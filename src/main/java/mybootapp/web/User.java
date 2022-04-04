@@ -1,15 +1,16 @@
-package mybootapp.manager;
+package mybootapp.web;
 
 import java.util.Date;
-import java.util.Set;
 
-import javax.persistence.Entity;
+import org.springframework.stereotype.Component;
+import org.springframework.web.context.annotation.SessionScope;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-@Entity
+@Component
+@SessionScope
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
@@ -22,3 +23,5 @@ public class User {
 	private Date birthDay;
 	
 }
+
+

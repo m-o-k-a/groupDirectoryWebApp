@@ -1,7 +1,7 @@
 package mybootapp.manager;
 import mybootapp.model.Group;
 import mybootapp.model.Person;
-import mybootapp.manager.User;
+import mybootapp.web.User;
 
 import java.util.Optional;
 

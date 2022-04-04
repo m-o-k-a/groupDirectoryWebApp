@@ -1,15 +1,25 @@
 package mybootapp.manager;
 
 import java.util.Collection;
+import java.util.Date;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+import org.springframework.web.context.annotation.SessionScope;
 
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 import mybootapp.repo.GroupRepository;
 import mybootapp.repo.PersonRepository;
+import mybootapp.web.User;
 import mybootapp.model.Group;
 import mybootapp.model.Person;
 
+@Component
+@Data
+@NoArgsConstructor
 public class DirectoryManager implements IDirectoryManager {
 	
     @Autowired

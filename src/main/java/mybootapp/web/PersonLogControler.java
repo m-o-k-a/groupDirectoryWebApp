@@ -22,7 +22,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-import mybootapp.manager.User;
 import mybootapp.manager.IDirectoryManager;
 
 @Controller
@@ -31,8 +30,8 @@ public class PersonLogControler {
 	
 	@Autowired 
 	User user; 
-	@Autowired 
-	IDirectoryManager manager;
+	//@Autowired 
+	//IDirectoryManager manager;
 	
 	
 	public User getUser() {

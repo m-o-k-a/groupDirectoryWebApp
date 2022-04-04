@@ -20,3 +20,4 @@
 	<script src="${bootstrap_js}"></script>
 </head>
 <body>
+<%@ include file="/WEB-INF/jsp/navbar.jsp"%>
