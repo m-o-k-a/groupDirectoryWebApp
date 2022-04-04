@@ -12,16 +12,16 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
-import mybootapp.model.Groups;
+import mybootapp.model.Group;
 import mybootapp.model.Person;
 
 @SpringBootApplication
 @EnableJpaRepositories(
         basePackages = {"mybootapp.repo"},
-        basePackageClasses = {Groups.class, Person.class}
+        basePackageClasses = {Group.class, Person.class}
         )
 
-@EntityScan(basePackageClasses = {Groups.class, Person.class})
+@EntityScan(basePackageClasses = {Group.class, Person.class})
 public class Starter extends SpringBootServletInitializer implements WebMvcConfigurer {
 
 	@Override

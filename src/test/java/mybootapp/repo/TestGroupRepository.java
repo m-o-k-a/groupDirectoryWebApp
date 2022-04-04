@@ -19,7 +19,7 @@ import org.springframework.test.context.ContextConfiguration;
 
 import mybootapp.repo.PersonRepository;
 import mybootapp.web.Starter;
-import mybootapp.model.Groups;
+import mybootapp.model.Group;
 import mybootapp.model.Person;
 
 
@@ -35,12 +35,12 @@ public class TestGroupRepository {
     
     private String[] values = {"Alpha"};
     private Date date;
-    private Groups g;
+    private Group g;
     
     @BeforeEach
     public void initEach() {
     	date = new Date();
-        g = new Groups(values[0]);
+        g = new Group(values[0]);
         groupRepository.deleteAll();
         assertFalse(groupRepository.findAll().iterator().hasNext());
     }

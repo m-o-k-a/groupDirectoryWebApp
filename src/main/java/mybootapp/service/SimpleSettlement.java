@@ -17,7 +17,7 @@ import org.springframework.stereotype.Service;
 
 import mybootapp.repo.GroupRepository;
 import mybootapp.repo.PersonRepository;
-import mybootapp.model.Groups;
+import mybootapp.model.Group;
 import mybootapp.model.Person;
 
 @Service("simpleSettlement")
@@ -33,7 +33,7 @@ public class SimpleSettlement implements ISettlement {
 	
 	private Random rand = new Random();
 	private List<Person> persons = new ArrayList<Person>();
-	private List<Groups> groups = new ArrayList<Groups>();
+	private List<Group> groups = new ArrayList<Group>();
 	
 	//public GroupRepository getGroupRepository() { return groupRepository; }
 	
@@ -54,14 +54,14 @@ public class SimpleSettlement implements ISettlement {
 		}
 		
 		for(int i = 0; i<amountOfGroup; i++) {
-			Groups g = new Groups("Group-"+i);
+			Group g = new Group("Group-"+i);
 			//groupRepository.save(g);
 			groups.add(g);
 		}
 	}
 	
 	public void associate() {
-		for(Groups g : groups) {
+		for(Group g : groups) {
 			for(Person p : persons) {
 				if(rand.nextInt(10)%3 == 0) {
 					g.addPerson(p);
@@ -76,7 +76,7 @@ public class SimpleSettlement implements ISettlement {
 	}
 
 	@Override
-	public List<Groups> getGroups() {
+	public List<Group> getGroups() {
 		return groups;	
 	}
 	

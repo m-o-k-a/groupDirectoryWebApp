@@ -1,6 +1,6 @@
 package mybootapp.web;
 import org.springframework.beans.factory.annotation.Value;
-import mybootapp.model.Groups;
+import mybootapp.model.Group;
 import mybootapp.model.Person;
 import mybootapp.repo.PersonRepository;
 

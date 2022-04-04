@@ -18,7 +18,7 @@ import org.springframework.test.context.ContextConfiguration;
 
 import mybootapp.repo.PersonRepository;
 import mybootapp.web.Starter;
-import mybootapp.model.Groups;
+import mybootapp.model.Group;
 import mybootapp.model.Person;
 
 
@@ -35,7 +35,7 @@ public class TestPersonRepository {
     private String[] values = {"John", "Doe", "john@doe", "john.doe", "password"};
     private Date date;
     private Person p;
-    private Groups g;
+    private Group g;
     
     @BeforeEach
     public void initEach() {
@@ -43,7 +43,7 @@ public class TestPersonRepository {
         p = new Person(values[0], values[1], values[2], values[3], date, values[4]);
         personRepository.deleteAll();
         assertFalse(personRepository.findAll().iterator().hasNext());
-        g = new Groups("onlyGroup");
+        g = new Group("onlyGroup");
         groupRepository.deleteAll();
         assertFalse(groupRepository.findAll().iterator().hasNext());
     }

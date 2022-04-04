@@ -25,7 +25,7 @@ import lombok.ToString;
 @Entity
 @Data
 @NoArgsConstructor
-public class Groups implements Serializable {
+public class Group implements Serializable {
 	
 	private static final long serialVersionUID = 1L;
 
@@ -63,7 +63,7 @@ public class Groups implements Serializable {
 	 	      return persons;
 	 	   }
 
-    public Groups(String name) {
+    public Group(String name) {
         this.name = name;
         this.persons = new HashSet<>();
     }

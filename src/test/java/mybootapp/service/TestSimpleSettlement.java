@@ -21,7 +21,7 @@ import org.springframework.test.context.ContextConfiguration;
 import mybootapp.repo.GroupRepository;
 import mybootapp.repo.PersonRepository;
 import mybootapp.web.Starter;
-import mybootapp.model.Groups;
+import mybootapp.model.Group;
 import mybootapp.model.Person;
 
 
@@ -60,7 +60,7 @@ public class TestSimpleSettlement {
     	groupRepository.saveAll(ss.getGroups());
     	assertEquals(size, personRepository.count());
     	assertEquals(size, groupRepository.count());
-    	List<Groups> groups = groupRepository.findAll();
+    	List<Group> groups = groupRepository.findAll();
     	for(int i = 0; i<ss.getGroups().size(); i++) {
     		assertEquals(ss.getGroups().get(i).getPersons().size(), groups.get(i).getPersons().size());
     	}

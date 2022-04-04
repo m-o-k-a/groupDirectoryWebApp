@@ -5,7 +5,7 @@ import java.util.Set;
 
 import org.springframework.stereotype.Service;
 
-import mybootapp.model.Groups;
+import mybootapp.model.Group;
 import mybootapp.model.Person;
 
 @Service("settlement")
@@ -15,5 +15,5 @@ public interface ISettlement {
 	
 	List<Person> getPersons();
 	
-	List<Groups> getGroups();
+	List<Group> getGroups();
 }
