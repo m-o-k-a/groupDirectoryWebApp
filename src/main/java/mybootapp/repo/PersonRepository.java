@@ -1,5 +1,6 @@
 package mybootapp.repo;
 
+import java.util.Collection;
 import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -9,25 +10,19 @@ import org.springframework.data.jpa.repository.Query;
 import mybootapp.model.Person;
 
 public interface PersonRepository extends JpaRepository<Person, Long> {
-	
-    //Person findById(long id);
 
-    List<Person> findByFirstName(String name);
-
-    List<Person> findByFirstNameLike(String name);
+    Collection<Person> findByFirstNameLike(String firstName);
     
-    List<Person> findByLastName(String name);
-    
-    List<Person> findByLastNameLike(String name);
+    Collection<Person> findByLastNameLike(String lastName);
     
     @Modifying
-    @Query("delete from Person p where p.firstName like ?1")
-    void deleteLikeFirstName(String pattern);
+    @Query("select p from Person p where p.firstName like ?1 and p.lastName like ?2")
+    Collection<Person> findByFirstNameLikeAndLastNameLike(String firstName, String lastName);
     
     @Modifying
-    @Query("delete from Person p where p.lastName like ?1")
-    void deleteLikeLastName(String pattern);
-    
+    @Query("delete from Person p where p.id like ?1")
+    void deleteById(Long id);
+
     @Modifying
     @Query("select p from Person p where p.mailAddress like ?1 and p.password like ?2")
     Person login(String mailAddress, String password);

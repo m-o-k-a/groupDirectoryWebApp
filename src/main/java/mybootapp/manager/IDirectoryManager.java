@@ -12,23 +12,18 @@ public interface IDirectoryManager {
 	//Create an anonymous user
 	User newUser();
 	
-	Optional<Person> findPerson(User user, long personId);
+	Optional<Person> findPerson(User user, long id);
+	Collection<Person>findAllPerson(User user);
+	Collection<Person>findPersonByName(User user, String firstName, String lastName);
+	boolean savePerson(User user, Person p);
+	void removePerson(User user, Person p);
 	
-	Optional<Group> findGroup(User user, long groupId);
-
-    Collection<Person> findPersonsByName(User user, String name);
+	Optional<Group> findGroup(User user, long id);
+	Collection<Group> findAllGroup(User user);
+	Collection<Group> findGroupByName(User user, String name);
+	boolean saveGroup(User user, Group g);
+	void removeGroup(User user, Group g);
 	
-	Collection<Person>findAllpersons(User user);
-	void savePerson(User user, Person p);
-	Collection<Person>findAllpersonsByGroup(User user, Long groupeId);
-	 Collection<Group> findAllGroup(User user);
-	 Collection<Group> findGroupsByName(User user, String name);
-	boolean login(User user, String mailAddress, String password);
-	
-	void logout(User user);
-	
-
-	void saveGroup(User user, Group g);
-	
-
+	boolean login(User user, String mailAddress, String password);	
+	boolean logout(User user);
 }

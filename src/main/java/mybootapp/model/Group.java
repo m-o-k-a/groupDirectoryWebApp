@@ -25,6 +25,7 @@ import lombok.ToString;
 @Entity
 @Data
 @NoArgsConstructor
+@Table(name = "group_table")
 public class Group implements Serializable {
 	
 	private static final long serialVersionUID = 1L;

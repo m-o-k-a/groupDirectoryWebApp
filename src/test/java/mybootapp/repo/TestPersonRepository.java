@@ -5,20 +5,15 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.Date;
-import java.util.List;
 import java.util.Optional;
 
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ContextConfiguration;
 
-import mybootapp.repo.PersonRepository;
 import mybootapp.web.Starter;
-import mybootapp.model.Group;
 import mybootapp.model.Person;
 
 
@@ -29,13 +24,9 @@ public class TestPersonRepository {
     @Autowired
     private PersonRepository personRepository;
     
-    @Autowired
-    private GroupRepository groupRepository;
-    
     private String[] values = {"John", "Doe", "john@doe", "john.doe", "password"};
     private Date date;
     private Person p;
-    private Group g;
     
     @BeforeEach
     public void initEach() {
@@ -43,9 +34,6 @@ public class TestPersonRepository {
         p = new Person(values[0], values[1], values[2], values[3], date, values[4]);
         personRepository.deleteAll();
         assertFalse(personRepository.findAll().iterator().hasNext());
-        g = new Group("onlyGroup");
-        groupRepository.deleteAll();
-        assertFalse(groupRepository.findAll().iterator().hasNext());
     }
 
     @Test

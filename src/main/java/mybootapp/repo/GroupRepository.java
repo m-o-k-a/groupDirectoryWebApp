@@ -10,15 +10,11 @@ import mybootapp.model.Group;
 import mybootapp.model.Person;
 
 public interface GroupRepository extends JpaRepository<Group, Long> {
-	
-	//Group findById(long id);
-
-    List<Group> findByName(String name);
 
     List<Group> findByNameLike(String name);
     
     @Modifying
-    @Query("delete from Groups g where g.name like ?1")
-    void deleteLikeName(String pattern);
+    @Query("delete from Group g where g.id like ?1")
+    void deleteById(Long id);
 
 }
