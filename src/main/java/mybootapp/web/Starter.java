@@ -25,8 +25,8 @@ import mybootapp.service.IDirectoryManager;
         basePackages = {"mybootapp.repo"}
         )
 
-@EntityScan(basePackages = {"mybootapp.repo", "mybootapp.model"})
-@ComponentScan(basePackages = {"mybootapp.service", "mybootapp.web"})
+@EntityScan(basePackages = {"mybootapp.repo"})
+@ComponentScan(basePackages = {"mybootapp.service", "mybootapp.web", "mybootapp.model"})
 public class Starter extends SpringBootServletInitializer implements WebMvcConfigurer {
 
 	@Override
