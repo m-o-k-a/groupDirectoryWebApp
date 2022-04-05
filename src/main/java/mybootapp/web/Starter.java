@@ -13,17 +13,18 @@ import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 import mybootapp.web.User;
-import mybootapp.manager.IDirectoryManager;
+import mybootapp.SpringConfiguration;
 import mybootapp.model.Group;
 import mybootapp.model.Person;
 
 @SpringBootApplication
 @EnableJpaRepositories(
-        basePackages = {"mybootapp.repo"},
-        basePackageClasses = {Group.class, Person.class}
+        basePackages = {"mybootapp.repo"}
         )
 
-@EntityScan(basePackageClasses = {Group.class, Person.class, User.class, IDirectoryManager.class})
+@EntityScan(basePackages = {"mybootapp.repo", "mybootapp.service", "mybootapp.model", "mybootapp.web",
+							"../mybootapp.repo", "../mybootapp.service", "../mybootapp.model", "../mybootapp.web",
+							"../repo", "../service", "../model", "../web"}, basePackageClasses = SpringConfiguration.class)
 public class Starter extends SpringBootServletInitializer implements WebMvcConfigurer {
 
 	@Override

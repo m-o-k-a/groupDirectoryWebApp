@@ -1,4 +1,4 @@
-package mybootapp.manager;
+package mybootapp.service;
 import mybootapp.model.Group;
 import mybootapp.model.Person;
 import mybootapp.web.User;
