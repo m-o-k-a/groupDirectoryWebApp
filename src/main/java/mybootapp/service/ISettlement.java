@@ -16,4 +16,6 @@ public interface ISettlement {
 	List<Person> getPersons();
 	
 	List<Group> getGroups();
+
+	void associate();
 }

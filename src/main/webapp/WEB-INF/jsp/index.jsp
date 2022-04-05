@@ -3,14 +3,7 @@
 <c:url var="list" value="/course/list" />
 
 <div class="container">
-	<h1>Spring boot application</h1>
-	<p>
-		Message is
-		<c:out value="${message}" />
-	</p>
-	<p>
-		<a href="${list}">Course</a>
-	</p>
+	<h1><c:out value="${application.title}"/></h1>
 </div>
 
 <%@ include file="/WEB-INF/jsp/footer.jsp"%>

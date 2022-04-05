@@ -108,4 +108,14 @@ public class DirectoryManager implements IDirectoryManager {
 		return (user != null);
 	}
 
+	@Override
+	public void saveAllPerson(User user, Collection<Person> p) {
+		personRepository.saveAll(p);
+	}
+
+	@Override
+	public void saveAllGroup(User user, Collection<Group> g) {
+		groupRepository.saveAll(g);
+	}
+
 }

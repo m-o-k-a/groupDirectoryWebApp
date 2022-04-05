@@ -16,12 +16,14 @@ public interface IDirectoryManager {
 	Collection<Person>findAllPerson(User user);
 	Collection<Person>findPersonByName(User user, String firstName, String lastName);
 	boolean savePerson(User user, Person p);
+	void saveAllPerson(User user, Collection<Person> p);
 	void removePerson(User user, Person p);
 	
 	Optional<Group> findGroup(User user, long id);
 	Collection<Group> findAllGroup(User user);
 	Collection<Group> findGroupByName(User user, String name);
 	boolean saveGroup(User user, Group g);
+	void saveAllGroup(User user, Collection<Group> g);
 	void removeGroup(User user, Group g);
 	
 	boolean login(User user, String mailAddress, String password);	

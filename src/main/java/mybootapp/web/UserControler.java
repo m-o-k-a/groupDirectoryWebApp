@@ -22,7 +22,7 @@ public class UserControler {
 	
 	protected final Log logger = LogFactory.getLog(getClass());
 	  
-	@Autowired()
+	@Autowired
 	User user;
 	  
 	@Autowired
