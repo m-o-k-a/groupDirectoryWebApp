@@ -34,13 +34,15 @@ public class MyControler {
 	}
 	
     @PostConstruct
-    @Transactional
     public void init() {
-    	settlement.settle(10, 10);
-    	directoryManager.saveAllPerson(user, settlement.getPersons());
-    	directoryManager.saveAllGroup(user, settlement.getGroups());
-    	settlement.associate();
-    	directoryManager.saveAllGroup(user, settlement.getGroups());
+    	//todo fix issue to give
+		try {
+	    	settlement.settle(20, 10);
+	    	directoryManager.saveAllPerson(user, settlement.getPersons());
+	    	directoryManager.saveAllGroup(user, settlement.getGroups());
+	    	settlement.associate();
+	    	directoryManager.saveAllGroup(user, settlement.getGroups());
+		} catch(Exception e) {}
     }
 
 }

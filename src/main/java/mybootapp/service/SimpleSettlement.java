@@ -62,6 +62,7 @@ public class SimpleSettlement implements ISettlement {
 	
 	public void associate() {
 		for(Group g : groups) {
+			g.getPersons().clear();
 			for(Person p : persons) {
 				if(rand.nextInt(10)%3 == 0) {
 					g.addPerson(p);

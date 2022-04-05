@@ -38,12 +38,12 @@ public class Group implements Serializable {
     //@Column(name = "name", length = 200, nullable = false, unique = false)
     private String name;
     
-    @ManyToMany( fetch = FetchType.EAGER, cascade = { CascadeType.MERGE, CascadeType.ALL }
+    @ManyToMany( fetch = FetchType.EAGER, cascade = { CascadeType.MERGE, CascadeType.PERSIST }
   	      )
   	   @JoinTable(
   	      name = "Person_Group",
-  	      joinColumns = { @JoinColumn(name = "id_person") },
-  	      inverseJoinColumns = { @JoinColumn(name = "id_group") }
+  	      joinColumns = { @JoinColumn(name = "id_group") },
+  	      inverseJoinColumns = { @JoinColumn(name = "id_person") }
   	      )
   	   @ToString.Exclude
   	   Set<Person> persons;
