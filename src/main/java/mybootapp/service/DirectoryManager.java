@@ -21,7 +21,6 @@ import mybootapp.model.Group;
 import mybootapp.model.Person;
 
 @Service("directoryManager")
-@Data
 public class DirectoryManager implements IDirectoryManager {
 	
     @Autowired

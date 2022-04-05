@@ -26,8 +26,7 @@ public class UserControler {
 	User user;
 	  
 	@Autowired
-	@Qualifier("directoryManagerBean")
-	IDirectoryManager directoryManagerBean;
+	IDirectoryManager directoryManager;
 
 	@ModelAttribute("user")
 	public User newUser() {
