@@ -1,5 +1,6 @@
 package mybootapp.service;
 
+import java.util.Collection;
 import java.util.List;
 import java.util.Set;
 
@@ -12,10 +13,4 @@ import mybootapp.model.Person;
 public interface ISettlement {
 	
 	void settle(int amountOfPerson, int amountOfGroup);
-	
-	List<Person> getPersons();
-	
-	List<Group> getGroups();
-
-	void associate();
 }

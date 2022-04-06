@@ -11,6 +11,8 @@ import mybootapp.model.Person;
 
 public interface GroupRepository extends JpaRepository<Group, Long> {
 
+    @Modifying
+    @Query("select g from Group g where g.name like %?1%")
     List<Group> findByNameLike(String name);
     
     @Modifying

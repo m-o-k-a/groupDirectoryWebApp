@@ -6,9 +6,10 @@
 <c:url var="userCat" value="user"/>
 <c:url var="userPath" value="/user"/>
 <c:url var="logoutPath" value="/logout"/>
+<c:url var="homePath" value="/"/>
 
 <nav class="navbar navbar-expand-md navbar-light bg-light">
-	<a class="navbar-brand" href="/">Group Directory App</a>
+	<a class="navbar-brand" href="${homePath}">Group Directory App</a>
 	<button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".dual-collapse" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
 		<span class="navbar-toggler-icon"></span>
 	</button>

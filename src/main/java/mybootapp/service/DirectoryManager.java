@@ -49,7 +49,10 @@ public class DirectoryManager implements IDirectoryManager {
 			if(lastName.length() > 0) { return personRepository.findByFirstNameLikeAndLastNameLike(firstName, lastName); } 
 			return personRepository.findByFirstNameLike(firstName);
 		}
-		return personRepository.findByLastNameLike(lastName);
+		if(lastName.length() > 0) {
+			return personRepository.findByLastNameLike(lastName);
+		}
+		return personRepository.findAll();
 	}
 	
 	@Override
@@ -116,6 +119,22 @@ public class DirectoryManager implements IDirectoryManager {
 	@Override
 	public void saveAllGroup(User user, Collection<Group> g) {
 		groupRepository.saveAll(g);
+	}
+
+	@Override
+	public Long getAmountOfPerson(User user) {
+		return personRepository.count();
+	}
+
+	@Override
+	public Long getAmountOfGroup(User user) {
+		return groupRepository.count();
+	}
+
+	@Override
+	public void reset() {
+		groupRepository.deleteAll();
+		personRepository.deleteAll();
 	}
 
 }

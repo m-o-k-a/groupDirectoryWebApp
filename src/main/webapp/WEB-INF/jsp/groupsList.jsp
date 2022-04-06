@@ -1,26 +1,9 @@
 <%@ include file="/WEB-INF/jsp/header.jsp"%>
-
-<c:url var="show" value="/groups/show" />
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 
 <div class="container">
-	<form class="form-inline m-2 justify-content-md-center">
-	  <input class="form-control w-50 mr-2" type="search" placeholder="Search Group" aria-label="Search Group">
-	  <button class="btn btn-outline-info my-2 my-sm-0 ml-2 mr-2" type="submit">Search</button>
-	</form>
-	<div class="row justify-content-md-center">
-		<c:forEach items="${groups}" var="gr">
-			<div class="col m-2">
-				<div class="card" style="width: 10rem;">
-				  <div class="card-body">
-				    <h6 class="card-title"><c:out value="${gr.name}" /></h6>
-				    <p class="card-subtitle small mb-2 text-muted"><c:out value="${gr.persons.size()} people"/></p>
-				    <hr>
-				    <a href="${show}?id=${gr.id}" class="btn btn-outline-info">Show Group</a>
-				  </div>
-				</div>
-			</div>
-		</c:forEach>
-	</div>
+	<%@ include file="/WEB-INF/jsp/groupsSearch.jsp"%>
+	<%@ include file="/WEB-INF/jsp/groupsListArray.jsp"%>
 </div>
 
 <%@ include file="/WEB-INF/jsp/footer.jsp"%>

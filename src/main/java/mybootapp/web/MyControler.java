@@ -1,14 +1,19 @@
 package mybootapp.web;
 
+import java.util.Set;
+
 import javax.annotation.PostConstruct;
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
+import mybootapp.model.Group;
+import mybootapp.model.Person;
 import mybootapp.service.IDirectoryManager;
 import mybootapp.service.ISettlement;
 
@@ -20,7 +25,7 @@ public class MyControler {
 	User user;
 	
 	@Autowired
-	IDirectoryManager directoryManager;
+	IDirectoryManager dm;
 	
 	@Autowired
 	ISettlement settlement;
@@ -29,20 +34,19 @@ public class MyControler {
 	 * Point d'entrée principal de l'application.
 	 */
 	@RequestMapping("")
-	public ModelAndView index() {
-		return new ModelAndView("index");
+	public ModelAndView index(Model model) {
+		model.addAttribute("person", new Person());
+		model.addAttribute("group", new Group());
+		ModelAndView index = new ModelAndView("index");
+		index.addObject("peopleAmount", dm.getAmountOfPerson(user));
+		index.addObject("groupAmount", dm.getAmountOfGroup(user));
+		return index;
 	}
 	
     @PostConstruct
+    @Transactional
     public void init() {
-    	//todo fix issue to give
-		try {
-	    	settlement.settle(20, 10);
-	    	directoryManager.saveAllPerson(user, settlement.getPersons());
-	    	directoryManager.saveAllGroup(user, settlement.getGroups());
-	    	settlement.associate();
-	    	directoryManager.saveAllGroup(user, settlement.getGroups());
-		} catch(Exception e) {}
+    	settlement.settle(1000, 1000);
     }
 
 }

@@ -18,13 +18,12 @@ public class SpringSecurity extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http
-                // -- ne pas activer la protection CSRF
         		.authorizeRequests().antMatchers("/login").permitAll()
 				.and()
                 // -- URL sans authentification
                 .authorizeRequests()//
-                .antMatchers("/", "/webjars/**", //
-                        "/home", "/login")//
+                .antMatchers("/", "/webjars/**", "/src/main/ressources/**", //
+                		 "/static/**", "/home", "/login")//
                 .permitAll()//
                 // -- Les autres URL nécessitent une authentification
                 .anyRequest().authenticated()

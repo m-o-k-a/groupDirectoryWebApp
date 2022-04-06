@@ -11,8 +11,12 @@ import mybootapp.model.Person;
 
 public interface PersonRepository extends JpaRepository<Person, Long> {
 
+    @Modifying
+    @Query("select p from Person p where p.firstName like %?1%")
     Collection<Person> findByFirstNameLike(String firstName);
     
+    @Modifying
+    @Query("select p from Person p where p.lastName like %?1%")
     Collection<Person> findByLastNameLike(String lastName);
     
     @Modifying

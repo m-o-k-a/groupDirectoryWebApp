@@ -16,6 +16,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
+import javax.transaction.Transactional;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -26,6 +27,7 @@ import lombok.ToString;
 @Data
 @NoArgsConstructor
 @Table(name = "group_table")
+@Transactional
 public class Group implements Serializable {
 	
 	private static final long serialVersionUID = 1L;
@@ -41,7 +43,7 @@ public class Group implements Serializable {
     @ManyToMany( fetch = FetchType.EAGER, cascade = { CascadeType.MERGE, CascadeType.PERSIST }
   	      )
   	   @JoinTable(
-  	      name = "Person_Group",
+  	      name = "group_person",
   	      joinColumns = { @JoinColumn(name = "id_group") },
   	      inverseJoinColumns = { @JoinColumn(name = "id_person") }
   	      )
@@ -51,6 +53,7 @@ public class Group implements Serializable {
 	   public void addPerson(Person person) {
  	      if (persons == null) persons = new HashSet<>();
  	      persons.size();
+ 	      getPersonsLazy();
  	      persons.add(person);
  	   }
 	   public void removePerson(Person person) {

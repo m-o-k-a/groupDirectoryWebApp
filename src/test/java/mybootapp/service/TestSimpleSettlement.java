@@ -9,6 +9,8 @@ import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 
+import javax.transaction.Transactional;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.BeforeAll;
@@ -27,12 +29,11 @@ import mybootapp.model.Person;
 
 @SpringBootTest
 @ContextConfiguration(classes = Starter.class)
-
+@Transactional
 public class TestSimpleSettlement {
 	
-    //@Autowired
-    //@Qualifier("simpleSettlementBean")
-    private SimpleSettlement ss = new SimpleSettlement();
+    @Autowired
+    private SimpleSettlement ss;
     
 	@Autowired
 	PersonRepository personRepository;
@@ -47,22 +48,21 @@ public class TestSimpleSettlement {
     public void testSettlement() {
     	int size = 1000;
     	//test settlement
+    	personRepository.deleteAll();
+    	groupRepository.deleteAll();
     	ss.settle(size, size);
-    	assertEquals(size, ss.getGroups().size());
-    	assertEquals(size, ss.getPersons().size());
-    	personRepository.saveAll(ss.getPersons());
-    	groupRepository.saveAll(ss.getGroups());
     	assertEquals(size, personRepository.count());
     	assertEquals(size, groupRepository.count());
     	
     	//test association
-    	ss.associate();
-    	groupRepository.saveAll(ss.getGroups());
-    	assertEquals(size, personRepository.count());
-    	assertEquals(size, groupRepository.count());
-    	List<Group> groups = groupRepository.findAll();
-    	for(int i = 0; i<ss.getGroups().size(); i++) {
-    		assertEquals(ss.getGroups().get(i).getPersons().size(), groups.get(i).getPersons().size());
+    	//ss.associate();
+    	//groupRepository.saveAll(ss.getGroups());
+    	//assertEquals(size, personRepository.count());
+    	//assertEquals(size, groupRepository.count());
+    	for(Group g : groupRepository.findAll()) {
+    		long id = g.getId();
+    		int length = groupRepository.getById(id).getPersonsLazy().size();
+    		assertEquals(g.getPersons().size(), length);
     	}
     }
 }

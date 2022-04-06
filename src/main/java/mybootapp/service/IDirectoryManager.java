@@ -9,8 +9,8 @@ import java.util.Optional;
 import java.util.Collection;
 public interface IDirectoryManager {
 	
-	//Create an anonymous user
 	User newUser();
+	void reset();
 	
 	Optional<Person> findPerson(User user, long id);
 	Collection<Person>findAllPerson(User user);
@@ -18,6 +18,7 @@ public interface IDirectoryManager {
 	boolean savePerson(User user, Person p);
 	void saveAllPerson(User user, Collection<Person> p);
 	void removePerson(User user, Person p);
+	Long getAmountOfPerson(User user);
 	
 	Optional<Group> findGroup(User user, long id);
 	Collection<Group> findAllGroup(User user);
@@ -25,6 +26,7 @@ public interface IDirectoryManager {
 	boolean saveGroup(User user, Group g);
 	void saveAllGroup(User user, Collection<Group> g);
 	void removeGroup(User user, Group g);
+	Long getAmountOfGroup(User user);
 	
 	boolean login(User user, String mailAddress, String password);	
 	boolean logout(User user);

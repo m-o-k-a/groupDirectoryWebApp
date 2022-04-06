@@ -18,6 +18,7 @@ import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.transaction.Transactional;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -29,6 +30,7 @@ import javax.persistence.JoinColumn;
 @Data
 @NoArgsConstructor
 @Table(name = "person_table")
+@Transactional
 public class Person implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -71,4 +73,5 @@ public class Person implements Serializable {
     	this.birthDay = birthDay;
     	this.password = password;
     }
+    
 }
