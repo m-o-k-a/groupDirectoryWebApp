@@ -1,10 +1,8 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
-<c:url var="search" value="/persons/list" />
-
 <div class="input-group">
-<form:form method="GET" modelAttribute="person" class="form-inline m-2 justify-content-md-center mx-auto" action="${search}">
+<form:form method="GET" modelAttribute="person" class="form-inline m-2 justify-content-md-center mx-auto" action="${searchPerson}">
    	<form:errors path="*" cssClass="alert alert-danger" element="div" />
    	<div class="input-group form-inline m-2 justify-content-md-center">
    		<div class="input-group-prepend"></div>

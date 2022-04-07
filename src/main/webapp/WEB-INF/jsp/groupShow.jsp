@@ -1,10 +1,8 @@
 <%@ include file="/WEB-INF/jsp/header.jsp"%>
 
-<c:url var="list" value="/groups/list" />
-
 <div class="container">
 	<div class="justify-content-md-center m-2 d-flex flex-column justify-content-center">
-		<a class="btn btn-outline-info my-2 my-sm-0 m-2 w-75 mx-auto" href="${list}">--- Return to Group List ---</a>
+		<a class="btn btn-outline-info my-2 my-sm-0 m-2 w-75 mx-auto" href="${listGroup}">--- Return to Group List ---</a>
 		<hr class="mx-auto"/>
 		<div class="input-group m-2 w-75 mx-auto">
 		  <div class="input-group-prepend">

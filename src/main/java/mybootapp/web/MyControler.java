@@ -27,6 +27,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import mybootapp.model.Group;
 import mybootapp.model.Person;
+import mybootapp.service.ErrorService;
 import mybootapp.service.IDirectoryManager;
 import mybootapp.service.ISettlement;
 
@@ -40,6 +41,9 @@ public class MyControler {
 	@Autowired
 	ISettlement settlement;
 	
+	@Autowired
+	ErrorService errorService;
+	
 	/*
 	 * Point d'entrée principal de l'application.
 	 */
@@ -51,10 +55,7 @@ public class MyControler {
 		index.addObject("peopleAmount", dm.getAmountOfPerson((User) httpSession.getAttribute("user")));
 		index.addObject("groupAmount", dm.getAmountOfGroup((User) httpSession.getAttribute("user")));
 		index.addObject("user", (User) httpSession.getAttribute("user"));
-		if(httpSession.getAttribute("errorSignIn") != null && ((boolean) httpSession.getAttribute("errorSignIn")) == true) {
-			 index.addObject("errorSignIn", true);
-			 httpSession.setAttribute("errorSignIn", false);
-		}
+		errorService.manage(index, httpSession);
 		return index;
 	}
 	

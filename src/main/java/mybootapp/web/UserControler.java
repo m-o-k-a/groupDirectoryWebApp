@@ -21,6 +21,7 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import mybootapp.model.Person;
+import mybootapp.service.ErrorService;
 import mybootapp.service.IDirectoryManager;
 
 import org.apache.commons.logging.Log;
@@ -34,6 +35,9 @@ public class UserControler {
 	  
 	@Autowired
 	IDirectoryManager dm;
+	
+	@Autowired
+	ErrorService errorService;
     
     @RequestMapping(value = "/signIn", method = RequestMethod.POST)
     public String signIn(Model model, @ModelAttribute Person qp, HttpServletRequest request, HttpSession httpSession) {
@@ -77,6 +81,7 @@ public class UserControler {
         ModelAndView res = new ModelAndView("userShow", "user", httpSession.getAttribute("user"));
         res.addObject("cat", "user");
         model.addAttribute("person", new Person());
+        errorService.manage(res, httpSession);
         return res;
     }
 

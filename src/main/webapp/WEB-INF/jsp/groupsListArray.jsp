@@ -1,7 +1,5 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
-<c:url var="showGroup" value="/groups/show" />
-
 <div class="row justify-content-md-center mx-auto">
 	<c:forEach items="${groups}" var="gr">
 		<div class="col m-2 col-md-auto">

@@ -17,6 +17,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import mybootapp.model.Group;
 import mybootapp.model.Person;
+import mybootapp.service.ErrorService;
 import mybootapp.service.IDirectoryManager;
 import mybootapp.service.ISettlement;
 
@@ -32,6 +33,9 @@ public class PersonControler {
 	@Autowired
 	IDirectoryManager dm;
 	
+	@Autowired
+	ErrorService errorService;
+	
     @RequestMapping(value = "/list", method = RequestMethod.GET)
     public ModelAndView listPersons(Model model, HttpSession httpSession, @RequestParam(value="firstName") Optional<String> qFirstName, @RequestParam(value="lastName") Optional<String> qLastName) {
         logger.info((User) httpSession.getAttribute("user")+" : Requested List of People");
@@ -42,6 +46,7 @@ public class PersonControler {
         res.addObject("cat", "persons");
         res.addObject("user", (User) httpSession.getAttribute("user"));
         model.addAttribute("person", new Person());
+        errorService.manage(res, httpSession);
         return res;
     }
     
@@ -57,6 +62,7 @@ public class PersonControler {
         res.addObject("user", (User) httpSession.getAttribute("user"));
         res.addObject("cat", "persons");
         model.addAttribute("person", new Person());
+        errorService.manage(res, httpSession);
         return res;
     }
 

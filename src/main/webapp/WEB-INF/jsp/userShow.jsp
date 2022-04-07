@@ -1,7 +1,5 @@
 <%@ include file="/WEB-INF/jsp/header.jsp"%>
 
-<c:url var="update" value="/user/update" />
-
 <div class="container">
 	<div class="justify-content-md-center m-2 d-flex flex-column justify-content-center">
 		<hr class="mx-auto"/>
@@ -38,7 +36,7 @@
 				  <p class="form-control border-bottom border-info" aria-label="birthDay" aria-describedby="birthDay"><c:out value="${user.birthDay}" /></p>
 			</div>
 		</c:if>
-		<a class="btn btn-outline-info my-2 my-sm-0 m-2 mx-auto" href="${update}">Update Informations</a>
+		<a class="btn btn-outline-info my-2 my-sm-0 m-2 mx-auto" href="${updateUser}">Update Informations</a>
 	</div>
 </div>
 

@@ -10,6 +10,7 @@
 	value="/webjars/bootstrap/4.6.0-1/js/bootstrap.min.js" />
 <c:url var="jquery_js" value="/webjars/jquery/3.5.1/jquery.min.js" />
 <c:url var="css" value="/style.css" />
+<%@ include file="/WEB-INF/jsp/links.jsp"%>
 
 <html>
 	<head>

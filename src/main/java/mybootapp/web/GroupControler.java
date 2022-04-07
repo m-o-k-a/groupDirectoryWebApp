@@ -18,6 +18,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import mybootapp.model.Group;
 import mybootapp.model.Person;
+import mybootapp.service.ErrorService;
 import mybootapp.service.IDirectoryManager;
 import mybootapp.service.ISettlement;
 
@@ -33,6 +34,9 @@ public class GroupControler {
 	@Autowired
 	IDirectoryManager dm;
 	
+	@Autowired
+	ErrorService errorService;
+	
     @RequestMapping(value = "/list", method = RequestMethod.GET)
     public ModelAndView listGroups(Model model, @RequestParam(value="name") Optional<String> qName, HttpSession httpSession) {
         logger.info((User) httpSession.getAttribute("user")+" : Requested List of Group");
@@ -44,6 +48,7 @@ public class GroupControler {
         res.addObject("user", (User) httpSession.getAttribute("user"));
         model.addAttribute("group", new Group());
         model.addAttribute("person", new Person());
+        errorService.manage(res, httpSession);
         return res;
     }
     
@@ -61,6 +66,7 @@ public class GroupControler {
         res.addObject("user", (User) httpSession.getAttribute("user"));
         res.addObject("cat", "groups");
         model.addAttribute("person", new Person());
+        errorService.manage(res, httpSession);
         return res;
     }
     
