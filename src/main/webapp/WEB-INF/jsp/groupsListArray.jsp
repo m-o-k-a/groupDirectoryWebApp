@@ -2,9 +2,9 @@
 
 <c:url var="showGroup" value="/groups/show" />
 
-<div class="row justify-content-md-center">
+<div class="row justify-content-md-center mx-auto">
 	<c:forEach items="${groups}" var="gr">
-		<div class="col m-2">
+		<div class="col m-2 col-md-auto">
 			<div class="card" style="width: 10rem;">
 			  <div class="card-body">
 			    <h6 class="card-title"><c:out value="${gr.name}" /></h6>

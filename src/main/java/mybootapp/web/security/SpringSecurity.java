@@ -28,12 +28,10 @@ public class SpringSecurity extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http
-        		.authorizeRequests().antMatchers("/login").permitAll()
-				.and()
-                // -- URL sans authentification
                 .authorizeRequests()//
                 .antMatchers("/", "/webjars/**", "/src/main/ressources/**", //
-                		 "/static/**", "/home", "/login", "/signIn", "/groups/**", "/persons/**", "/user/**")//
+                		 "/static/**", "/home", "/login", "/signIn", "/groups/**", "/persons/**", "/user/**",
+                		 "/user/signOut", "/user/signIn")//
                 .permitAll()//
                 // -- Les autres URL nécessitent une authentification
                 .anyRequest().authenticated()

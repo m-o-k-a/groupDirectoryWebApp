@@ -30,33 +30,31 @@ public class PersonControler {
 	protected final Log logger = LogFactory.getLog(getClass());
 	  
 	@Autowired
-	User user;
-	  
-	@Autowired
 	IDirectoryManager dm;
 	
     @RequestMapping(value = "/list", method = RequestMethod.GET)
-    public ModelAndView listPersons(Model model, @RequestParam(value="firstName") Optional<String> qFirstName, @RequestParam(value="lastName") Optional<String> qLastName) {
-        logger.info(user+" : Requested List of People");
+    public ModelAndView listPersons(Model model, HttpSession httpSession, @RequestParam(value="firstName") Optional<String> qFirstName, @RequestParam(value="lastName") Optional<String> qLastName) {
+        logger.info((User) httpSession.getAttribute("user")+" : Requested List of People");
         String fn = (qFirstName.isEmpty()) ? "" : qFirstName.get();
         String ln = (qLastName.isEmpty()) ? "" : qLastName.get();
-        Collection<Person> persons = dm.findPersonByName(user, fn, ln);
+        Collection<Person> persons = dm.findPersonByName((User) httpSession.getAttribute("user"), fn, ln);
         ModelAndView res = new ModelAndView("personsList", "persons", persons);
         res.addObject("cat", "persons");
+        res.addObject("user", (User) httpSession.getAttribute("user"));
         model.addAttribute("person", new Person());
         return res;
     }
     
     @RequestMapping(value = "/show/{id}", method = RequestMethod.GET)
-    public ModelAndView showPerson(Model model, @PathVariable("id") Long id) {
-        logger.info(user+" : Requested Show Person of id : "+id);
-        Optional<Person> person = dm.findPerson(user, id);      
+    public ModelAndView showPerson(Model model, @PathVariable("id") Long id, HttpSession httpSession) {
+        logger.info((User) httpSession.getAttribute("user")+" : Requested Show Person of id : "+id);
+        Optional<Person> person = dm.findPerson((User) httpSession.getAttribute("user"), id);      
         if(person.isEmpty()) {
         	//todo manage
         }
         Person pr = person.get();
         ModelAndView res = new ModelAndView("personShow", "pr", pr);
-        res.addObject("user", user);
+        res.addObject("user", (User) httpSession.getAttribute("user"));
         res.addObject("cat", "persons");
         model.addAttribute("person", new Person());
         return res;

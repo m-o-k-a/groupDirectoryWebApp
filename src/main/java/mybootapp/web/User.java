@@ -3,6 +3,7 @@ package mybootapp.web;
 import java.util.Date;
 
 import org.springframework.stereotype.Component;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.context.annotation.SessionScope;
 
 import lombok.AllArgsConstructor;

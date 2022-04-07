@@ -2,9 +2,9 @@
 
 <c:url var="showPerson" value="/persons/show" />
 
-<div class="row justify-content-md-center">
+<div class="row justify-content-md-center mx-auto">
 	<c:forEach items="${persons}" var="pr">
-		<div class="col m-2">
+		<div class="col m-2 col-md-auto">
 			<div class="card" style="width: 10rem;">
 			  <div class="card-body">
 			    <h6 class="card-title"><c:out value="${pr.firstName}"/></h6>

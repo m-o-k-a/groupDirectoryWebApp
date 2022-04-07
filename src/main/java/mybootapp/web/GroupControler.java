@@ -31,28 +31,26 @@ public class GroupControler {
 	protected final Log logger = LogFactory.getLog(getClass());
 	  
 	@Autowired
-	User user;
-	  
-	@Autowired
 	IDirectoryManager dm;
 	
     @RequestMapping(value = "/list", method = RequestMethod.GET)
-    public ModelAndView listGroups(Model model, @RequestParam(value="name") Optional<String> qName) {
-        logger.info(user+" : Requested List of Group");
+    public ModelAndView listGroups(Model model, @RequestParam(value="name") Optional<String> qName, HttpSession httpSession) {
+        logger.info((User) httpSession.getAttribute("user")+" : Requested List of Group");
         Collection<Group> groups;
-        if(!qName.isEmpty()) groups = dm.findGroupByName(user, qName.get());
-        else groups = dm.findAllGroup(user);
+        if(!qName.isEmpty()) groups = dm.findGroupByName((User) httpSession.getAttribute("user"), qName.get());
+        else groups = dm.findAllGroup((User) httpSession.getAttribute("user"));
         ModelAndView res = new ModelAndView("groupsList", "groups", groups);
         res.addObject("cat", "groups");
+        res.addObject("user", (User) httpSession.getAttribute("user"));
         model.addAttribute("group", new Group());
         model.addAttribute("person", new Person());
         return res;
     }
     
     @RequestMapping(value = "/show/{id}", method = RequestMethod.GET)
-    public ModelAndView showGroup(Model model, @PathVariable("id") Long id) {
-        logger.info(user+" : Requested Show Group of id : "+id);
-        Optional<Group> group = dm.findGroup(user, id);      
+    public ModelAndView showGroup(Model model, @PathVariable("id") Long id, HttpSession httpSession) {
+        logger.info((User) httpSession.getAttribute("user")+" : Requested Show Group of id : "+id);
+        Optional<Group> group = dm.findGroup((User) httpSession.getAttribute("user"), id);      
         if(group.isEmpty()) {
         	//todo manage
         }
@@ -60,7 +58,7 @@ public class GroupControler {
         Collection<Person> persons = gr.getPersons();
         ModelAndView res = new ModelAndView("groupShow", "gr", gr);
         res.addObject("persons", persons);
-        res.addObject("user", user);
+        res.addObject("user", (User) httpSession.getAttribute("user"));
         res.addObject("cat", "groups");
         model.addAttribute("person", new Person());
         return res;

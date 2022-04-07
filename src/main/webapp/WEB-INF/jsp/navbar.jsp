@@ -5,8 +5,8 @@
 <c:url var="personsPath" value="/persons/list"/>
 <c:url var="userCat" value="user"/>
 <c:url var="userPath" value="/user"/>
-<c:url var="signInPath" value="/signIn"/>
-<c:url var="signOutPath" value="/signOut"/>
+<c:url var="signInPath" value="/user/signIn"/>
+<c:url var="signOutPath" value="/user/signOut"/>
 <c:url var="homePath" value="/"/>
 
 <%@ include file="/WEB-INF/jsp/navbarModal.jsp"%>
