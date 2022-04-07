@@ -4,7 +4,7 @@
 
 <div class="container">	
 	<c:if test="${user.getFirstName().length() > 0}">
-		<div class="alert alert-info m-4 text-center" role="alert">
+		<div id="errorSignIn" class="alert alert-info m-4 text-center" role="alert">
 			Welcome <c:out value="${user.getFirstName()} ${user.getLastName()}"/>
 		</div>	
 	</c:if>

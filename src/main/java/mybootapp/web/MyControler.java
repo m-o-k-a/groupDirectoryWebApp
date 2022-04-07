@@ -51,6 +51,10 @@ public class MyControler {
 		index.addObject("peopleAmount", dm.getAmountOfPerson((User) httpSession.getAttribute("user")));
 		index.addObject("groupAmount", dm.getAmountOfGroup((User) httpSession.getAttribute("user")));
 		index.addObject("user", (User) httpSession.getAttribute("user"));
+		if(httpSession.getAttribute("errorSignIn") != null && ((boolean) httpSession.getAttribute("errorSignIn")) == true) {
+			 index.addObject("errorSignIn", true);
+			 httpSession.setAttribute("errorSignIn", false);
+		}
 		return index;
 	}
 	

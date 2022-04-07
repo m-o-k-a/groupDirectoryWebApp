@@ -29,17 +29,11 @@ public class SpringSecurity extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http
                 .authorizeRequests()//
-                .antMatchers("/", "/webjars/**", "/src/main/ressources/**", //
-                		 "/static/**", "/home", "/login", "/signIn", "/groups/**", "/persons/**", "/user/**",
-                		 "/user/signOut", "/user/signIn")//
+                .antMatchers("/", "/webjars/**", "/style.css",
+                		 "/groups/**", "/persons/**", "/user/**")// "roupDirectoryWebApp/src\\main\\resources\\static"
                 .permitAll()//
                 // -- Les autres URL nécessitent une authentification
-                .anyRequest().authenticated()
-                // -- Nous autorisons un formulaire de login
-                .and().formLogin().permitAll()
-                .and().formLogin().permitAll() //loginPage("/login")
-                // -- Nous autorisons un formulaire de logout
-                .and().logout().permitAll();
+                .anyRequest().permitAll();//.denyAll();
     }
     
     /* Définir la base de l'authentification. */

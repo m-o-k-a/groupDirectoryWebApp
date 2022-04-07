@@ -12,14 +12,19 @@
         </button>
       </div>
       <c:url var="searchGroup" value="/groups/list" />
-      <form:form method="POST" modelAttribute="person" class="form-inline d-flex flex-column" action="${signInPath}">
+      <form:form id="signIn" method="POST" modelAttribute="person" class="form-inline d-flex flex-column" action="${signInPath}">
 	      <div class="modal-body justify-content-center">
-		   	<form:errors path="*" cssClass="alert alert-danger" element="div" />
+	      <c:if test='${errorSignIn eq true}'>
+	      	<script>$('#signInModal').modal('toggle'); $('#signInModal').on('hidden.bs.modal', () => document.getElementById('signInError').remove());</script>
+		   	<div id="signInError" class="alert alert-danger">
+		   		Wrong Mail or Password.
+		   	</div>
+	      </c:if>
 			<div class="input-group m-2">
 			  <div class="input-group-prepend">
 			    <span class="input-group-text bg-info text-white border-info" id="mailAddress">Mail Address</span>
 			  </div>
-			  <form:input required="true" path="mailAddress" class="form-control border-bottom border-info" aria-label="mailAddress" aria-describedby="mailAddress" placeholder="John@Doe.com"/>
+			  <form:input required="true" type="email" path="mailAddress" class="form-control border-bottom border-info" aria-label="mailAddress" aria-describedby="mailAddress" placeholder="John@Doe.com"/>
 			</div>
 			<div class="input-group m-2">
 			  <div class="input-group-prepend">

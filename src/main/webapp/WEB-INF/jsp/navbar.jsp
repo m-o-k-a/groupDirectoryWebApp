@@ -4,7 +4,7 @@
 <c:url var="personsCat" value="persons"/>
 <c:url var="personsPath" value="/persons/list"/>
 <c:url var="userCat" value="user"/>
-<c:url var="userPath" value="/user"/>
+<c:url var="userPath" value="/user/show"/>
 <c:url var="signInPath" value="/user/signIn"/>
 <c:url var="signOutPath" value="/user/signOut"/>
 <c:url var="homePath" value="/"/>
