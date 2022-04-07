@@ -28,6 +28,6 @@ public interface IDirectoryManager {
 	void removeGroup(User user, Group g);
 	Long getAmountOfGroup(User user);
 	
-	boolean login(User user, String mailAddress, String password);	
+	Collection<Person> login(User user, String mailAddress, String password);	
 	boolean logout(User user);
 }

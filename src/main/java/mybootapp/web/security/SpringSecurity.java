@@ -1,5 +1,6 @@
 package mybootapp.web.security;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
@@ -10,10 +11,19 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 
+import mybootapp.repo.GroupRepository;
+import mybootapp.repo.PersonRepository;
+
 @Component
 @EnableWebSecurity
 @EnableGlobalMethodSecurity(prePostEnabled = true, securedEnabled = true, jsr250Enabled = true)
 public class SpringSecurity extends WebSecurityConfigurerAdapter {
+	
+	@Autowired
+	PersonRepository pr;
+	
+	@Autowired
+	GroupRepository gr;
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
@@ -23,7 +33,7 @@ public class SpringSecurity extends WebSecurityConfigurerAdapter {
                 // -- URL sans authentification
                 .authorizeRequests()//
                 .antMatchers("/", "/webjars/**", "/src/main/ressources/**", //
-                		 "/static/**", "/home", "/login")//
+                		 "/static/**", "/home", "/login", "/signIn", "/groups/**", "/persons/**", "/user/**")//
                 .permitAll()//
                 // -- Les autres URL nécessitent une authentification
                 .anyRequest().authenticated()
@@ -39,10 +49,6 @@ public class SpringSecurity extends WebSecurityConfigurerAdapter {
     protected void configure(final AuthenticationManagerBuilder auth) throws Exception {
         var encoder = passwordEncoder();
         auth.inMemoryAuthentication()//
-                .withUser("user1").password(encoder.encode("user1")).authorities("USER")//
-                .and()//
-                .withUser("user2").password(encoder.encode("user2")).authorities("USER")//
-                .and()//
                 .withUser("admin").password(encoder.encode("admin")).authorities("ADMIN");
     }
 

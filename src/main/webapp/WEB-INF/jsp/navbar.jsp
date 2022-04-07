@@ -5,8 +5,11 @@
 <c:url var="personsPath" value="/persons/list"/>
 <c:url var="userCat" value="user"/>
 <c:url var="userPath" value="/user"/>
-<c:url var="logoutPath" value="/logout"/>
+<c:url var="signInPath" value="/signIn"/>
+<c:url var="signOutPath" value="/signOut"/>
 <c:url var="homePath" value="/"/>
+
+<%@ include file="/WEB-INF/jsp/navbarModal.jsp"%>
 
 <nav class="navbar navbar-expand-md navbar-light bg-light">
 	<a class="navbar-brand" href="${homePath}">Group Directory App</a>
@@ -21,16 +24,25 @@
 	      <li class="nav-item">
 	        <a class=<c:choose><c:when test="${cat eq groupsCat}">"nav-link active"</c:when><c:otherwise>"nav-link"</c:otherwise></c:choose> href="${groupsPath}">Groups</a>
 	      </li>
-	      <li class="nav-item">
-	        <a class=<c:choose><c:when test="${cat eq userCat}">"nav-link active"</c:when><c:otherwise>"nav-link"</c:otherwise></c:choose> href="${userPath}">About Me</a>
-	      </li>
 	    </ul>
     </div>
     <div class="navbar-collapse collapse w-100 order-3 dual-collapse">
         <ul class="navbar-nav ml-auto">
-	      <li class="nav-item">
-	        <a class="nav-link" href="${logoutPath}">Logout</a>
-	      </li>
+        	<c:choose>
+		        <c:when test = "${user.getFirstName().length() > 0}">
+			      <li class="nav-item">
+			        <a class=<c:choose><c:when test="${cat eq userCat}">"nav-link active"</c:when><c:otherwise>"nav-link"</c:otherwise></c:choose> href="${userPath}">About Me</a>
+			      </li>
+			      <li class="nav-item">
+			        <a class="nav-link" href="${signOutPath}">Sign Out</a>
+			      </li>
+		        </c:when>
+		         <c:otherwise>
+			      <li class="nav-item">
+			      	<a type="button" class="nav-link" data-toggle="modal" data-target="#signInModal">Sign In</a>
+			      </li>
+		         </c:otherwise>
+	      </c:choose>
         </ul>
     </div>
 </nav>

@@ -93,16 +93,8 @@ public class DirectoryManager implements IDirectoryManager {
 	}
 	
 	@Override
-	public boolean login(User user, String mailAddress, String password) {
-		Person p = personRepository.login(mailAddress, password);
-		if(p == null) return false;
-		user = new User(p.getId(),
-				p.getFirstName(), 
-				p.getLastName(), 
-				p.getMailAddress(), 
-				p.getWebAddress(), 
-				p.getBirthDay());
-		return true;
+	public Collection<Person> login(User user, String mailAddress, String password) {
+		return personRepository.login(mailAddress, password);
 	}
 
 	@Override

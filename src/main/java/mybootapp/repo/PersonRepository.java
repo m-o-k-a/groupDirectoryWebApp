@@ -2,6 +2,7 @@ package mybootapp.repo;
 
 import java.util.Collection;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
@@ -29,6 +30,6 @@ public interface PersonRepository extends JpaRepository<Person, Long> {
 
     @Modifying
     @Query("select p from Person p where p.mailAddress like ?1 and p.password like ?2")
-    Person login(String mailAddress, String password);
+    Collection<Person> login(String mailAddress, String password);
 
 }

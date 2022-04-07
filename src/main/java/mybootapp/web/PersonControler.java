@@ -48,7 +48,7 @@ public class PersonControler {
     }
     
     @RequestMapping(value = "/show/{id}", method = RequestMethod.GET)
-    public ModelAndView showPerson(@PathVariable("id") Long id) {
+    public ModelAndView showPerson(Model model, @PathVariable("id") Long id) {
         logger.info(user+" : Requested Show Person of id : "+id);
         Optional<Person> person = dm.findPerson(user, id);      
         if(person.isEmpty()) {
@@ -58,6 +58,7 @@ public class PersonControler {
         ModelAndView res = new ModelAndView("personShow", "pr", pr);
         res.addObject("user", user);
         res.addObject("cat", "persons");
+        model.addAttribute("person", new Person());
         return res;
     }
 

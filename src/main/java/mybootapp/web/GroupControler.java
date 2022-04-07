@@ -45,11 +45,12 @@ public class GroupControler {
         ModelAndView res = new ModelAndView("groupsList", "groups", groups);
         res.addObject("cat", "groups");
         model.addAttribute("group", new Group());
+        model.addAttribute("person", new Person());
         return res;
     }
     
     @RequestMapping(value = "/show/{id}", method = RequestMethod.GET)
-    public ModelAndView showGroup(@PathVariable("id") Long id) {
+    public ModelAndView showGroup(Model model, @PathVariable("id") Long id) {
         logger.info(user+" : Requested Show Group of id : "+id);
         Optional<Group> group = dm.findGroup(user, id);      
         if(group.isEmpty()) {
@@ -61,6 +62,7 @@ public class GroupControler {
         res.addObject("persons", persons);
         res.addObject("user", user);
         res.addObject("cat", "groups");
+        model.addAttribute("person", new Person());
         return res;
     }
     

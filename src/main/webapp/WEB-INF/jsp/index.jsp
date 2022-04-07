@@ -3,6 +3,11 @@
 <c:url var="list" value="/course/list" />
 
 <div class="container">	
+	<c:if test="${user.getFirstName().length() > 0}">
+		<div class="alert alert-info m-4 text-center" role="alert">
+			Welcome <c:out value="${user.getFirstName()} ${user.getLastName()}"/>
+		</div>	
+	</c:if>
 	<div class="card bg-outline-info m-4 text-center">
 	  <div class="card-header">People</div>
 	  <div class="card-body">
