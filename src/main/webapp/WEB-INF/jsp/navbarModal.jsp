@@ -21,16 +21,16 @@
 		   	</div>
 	      </c:if>
 			<div class="input-group m-2">
-			  <div class="input-group-prepend">
-			    <span class="input-group-text bg-info text-white border-info" id="mailAddress">Mail Address</span>
+			  <div class="input-group-prepend col-5">
+			    <span class="input-group-text bg-info text-white border-info col-12 rounded" id="mailAddress">Mail Address</span>
 			  </div>
-			  <form:input required="true" type="email" path="mailAddress" class="form-control border-bottom border-info" aria-label="mailAddress" aria-describedby="mailAddress" placeholder="John@Doe.com"/>
+			  <form:input required="true" type="email" path="mailAddress" class="form-control border-bottom border-info rounded" aria-label="mailAddress" aria-describedby="mailAddress"/>
 			</div>
 			<div class="input-group m-2">
-			  <div class="input-group-prepend">
-			    <span class="input-group-text bg-info text-white border-info" id="password">Password</span>
+			  <div class="input-group-prepend col-5">
+			    <span class="input-group-text bg-info text-white border-info col-12 rounded" id="password">Password</span>
 			  </div>
-			  <form:input required="true" path="password" type="password" class="form-control border-bottom border-info" aria-label="password" aria-describedby="password"/>
+			  <form:input required="true" path="password" type="password" class="form-control border-bottom border-info rounded" aria-label="password" aria-describedby="password"/>
 			</div>
 	      </div>
 	      <div class="modal-footer w-100 justify-content-center">
