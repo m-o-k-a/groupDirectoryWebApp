@@ -31,7 +31,7 @@
 		  <div class="input-group-prepend col-5">
 		    <span class="input-group-text bg-info text-white border-info col-12 rounded" id="birthDay">BirthDay</span>
 		  </div>
-		  <form:input required="true" path="birthDay" type="date" class="form-control border-bottom border-info rounded" aria-label="birthDay" aria-describedby="birthDay" value="${user.birthDay}"/>
+		  <form:input required="true" disabled="true" path="birthDay" type="date" class="form-control border-bottom border-info rounded" aria-label="birthDay" aria-describedby="birthDay" value="${user.birthDay}"/>
 		</div>
 		<div class="input-group m-2 w-75 mx-auto">
 		  <div class="input-group-prepend col-5">

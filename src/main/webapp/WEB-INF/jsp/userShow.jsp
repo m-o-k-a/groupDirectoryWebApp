@@ -39,6 +39,9 @@
 		  		<div class="btn-group my-2 my-sm-0 m-2 mx-auto" role="group" aria-label="Actions Group">
 					<a class="btn btn-outline-info" href="${updateUser}">Update Informations</a>
 		  		</div>
+		  		<div class="btn-group my-2 my-sm-0 m-2 mx-auto" role="group" aria-label="Actions Group">
+					<a class="btn btn-outline-info" href="${updateUserPassword}">Update Password</a>
+		  		</div>
 			</div>
 	</div>
 </div>

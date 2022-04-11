@@ -35,6 +35,7 @@
 	      </div>
 	      <div class="modal-footer w-100 justify-content-center">
         	<button class="btn btn-outline-info" type="submit">Sign In</button>
+        	<a class="btn btn-outline-info" href="${updateUserPassword}">Password Lost?</a>
 	      </div>
 	   </form:form>
     </div>

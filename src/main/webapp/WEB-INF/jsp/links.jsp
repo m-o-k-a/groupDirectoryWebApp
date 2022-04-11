@@ -2,6 +2,7 @@
 
 <c:url var="showUser" value="/user/show" />
 <c:url var="updateUser" value="/user/update" />
+<c:url var="updateUserPassword" value="/user/passwordReset" />
 
 <c:url var="listGroup" value="/groups/list" />
 <c:url var="showGroup" value="/groups/show" />

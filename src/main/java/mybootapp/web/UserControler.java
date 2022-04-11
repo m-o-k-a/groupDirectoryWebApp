@@ -3,7 +3,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.autoconfigure.domain.EntityScan;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Collection;
+import java.util.Date;
 import java.util.Optional;
 
 import javax.servlet.http.HttpServletRequest;
@@ -96,17 +99,50 @@ public class UserControler {
         return res;
     }
     
-    @RequestMapping(value = "/update", method = RequestMethod.POST)
-    public ModelAndView updatePersonPost(Model model, HttpSession httpSession, @ModelAttribute Person p, BindingResult result) {
+    @RequestMapping(value = "/passwordReset", method = RequestMethod.GET)
+    public ModelAndView passwordResetAsk(Model model, HttpSession httpSession, @ModelAttribute Person p) {
+    	model.addAttribute("person", new Person());
+    	User user = ((User) httpSession.getAttribute("user"));
+        ModelAndView res = new ModelAndView("userPasswordUpdate", "user", httpSession.getAttribute("user"));
+        res.addObject("cat", "user");
+        logger.info((User) httpSession.getAttribute("user")+" : Requested Update of itself");
+    	if(user == null || user.getId() == null) {
+    		res.addObject("request", true);
+    	} else {
+    		res.addObject("requestSent", true);
+    	}
+        errorService.manage(res, httpSession);
+        return res;
+    }
+    
+    @RequestMapping(value = "/passwordReset", method = RequestMethod.POST)
+    public ModelAndView passwordResetPost(Model model, HttpSession httpSession, @ModelAttribute Person p) {
+    	model.addAttribute("person", new Person());
+    	User user = ((User) httpSession.getAttribute("user"));
+        ModelAndView res = new ModelAndView("userPasswordUpdate", "user", httpSession.getAttribute("user"));
+        res.addObject("cat", "user");
+        res.addObject("requestSent", true);
+        errorService.manage(res, httpSession);
+        return res;
+    }
+    
+	@RequestMapping(value = "/update", method = RequestMethod.POST)
+    public ModelAndView updatePersonPost(Model model, HttpSession httpSession, @ModelAttribute User u, BindingResult result) throws ParseException {
     	model.addAttribute("person", new Person());
     	User user = ((User) httpSession.getAttribute("user"));
     	if(user == null || user.getId() == null) return new ModelAndView("redirect:/");
         logger.info((User) httpSession.getAttribute("user")+" : Requested Updated itself");
-        if (result.hasErrors()) {
-        	return new ModelAndView("redirect:/user/update");
-        }
+        Person p = new Person();
         p.setId(user.getId());
         user.setFirstName((String) result.getFieldValue("firstName")); p.setFirstName(user.getFirstName());
+        user.setLastName((String) result.getFieldValue("lastName")); p.setLastName(user.getLastName());
+        user.setMailAddress((String) result.getFieldValue("mailAddress")); p.setMailAddress(user.getMailAddress());
+        user.setWebAddress((String) result.getFieldValue("webAddress")); p.setWebAddress(user.getWebAddress());
+        /* todo fix date issues 
+        String sd = ((String) result.getFieldValue("birthDay")).replace('/', '-');
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        user.setBirthDay(sdf.parse(sd)); p.setBirthDay(user.getBirthDay());
+        */
         dm.savePerson(user, p);
         httpSession.setAttribute("user", user);
         ModelAndView res = new ModelAndView("userShow", "user", httpSession.getAttribute("user"));

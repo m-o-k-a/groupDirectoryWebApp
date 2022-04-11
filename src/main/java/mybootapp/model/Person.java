@@ -60,7 +60,7 @@ public class Person implements Serializable {
     @Basic
     @Temporal(TemporalType.DATE)
     //@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd", timezone = "PST")
-    @DateTimeFormat(pattern = "YYYY-MM-DD")
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     //@Column(name = "birth_day")
     private Date birthDay;
     
