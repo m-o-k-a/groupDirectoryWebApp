@@ -1,10 +1,16 @@
-.card, .alert {
-    border-radius: 5px;
-    box-shadow: 0 5px 10px rgba(0,0,0,0.08), 0 0 5px rgba(0,0,0,0.05);
+.card, .alert, .input-group {
     transition: .3s transform cubic-bezier(.155,1.105,.295,1.12),.3s box-shadow,.3s -webkit-transform cubic-bezier(.155,1.105,.295,1.12);
 }
 
-.card:hover, .alert:hover {
+.card:hover, .alert:hover, .input-group:hover {
 	transform: scale(1.04);
+}
+
+.card, .alert {
+	border-radius: 5px;
+    box-shadow: 0 5px 10px rgba(0,0,0,0.08), 0 0 5px rgba(0,0,0,0.05);
+}
+
+.card:hover, .alert:hover {
 	box-shadow: 0 10px 20px rgba(0,0,0,.10), 0 4px 8px rgba(0,0,0,.06);
 }

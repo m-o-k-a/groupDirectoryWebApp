@@ -20,6 +20,8 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.transaction.Transactional;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -57,6 +59,8 @@ public class Person implements Serializable {
 
     @Basic
     @Temporal(TemporalType.DATE)
+    //@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd", timezone = "PST")
+    @DateTimeFormat(pattern = "YYYY-MM-DD")
     //@Column(name = "birth_day")
     private Date birthDay;
     

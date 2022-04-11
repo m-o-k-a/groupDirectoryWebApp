@@ -80,9 +80,38 @@ public class UserControler {
         logger.info((User) httpSession.getAttribute("user")+" : Requested Show of itself");
         ModelAndView res = new ModelAndView("userShow", "user", httpSession.getAttribute("user"));
         res.addObject("cat", "user");
-        model.addAttribute("person", new Person());
         errorService.manage(res, httpSession);
         return res;
     }
-
+    
+    @RequestMapping(value = "/update", method = RequestMethod.GET)
+    public ModelAndView updatePerson(Model model, HttpSession httpSession, @ModelAttribute Person p) {
+    	model.addAttribute("person", new Person());
+    	User user = ((User) httpSession.getAttribute("user"));
+    	if(user == null || user.getId() == null) return new ModelAndView("redirect:/");
+        logger.info((User) httpSession.getAttribute("user")+" : Requested Update of itself");
+        ModelAndView res = new ModelAndView("userUpdate", "user", httpSession.getAttribute("user"));
+        res.addObject("cat", "user");
+        errorService.manage(res, httpSession);
+        return res;
+    }
+    
+    @RequestMapping(value = "/update", method = RequestMethod.POST)
+    public ModelAndView updatePersonPost(Model model, HttpSession httpSession, @ModelAttribute Person p, BindingResult result) {
+    	model.addAttribute("person", new Person());
+    	User user = ((User) httpSession.getAttribute("user"));
+    	if(user == null || user.getId() == null) return new ModelAndView("redirect:/");
+        logger.info((User) httpSession.getAttribute("user")+" : Requested Updated itself");
+        if (result.hasErrors()) {
+        	return new ModelAndView("redirect:/user/update");
+        }
+        p.setId(user.getId());
+        user.setFirstName((String) result.getFieldValue("firstName")); p.setFirstName(user.getFirstName());
+        dm.savePerson(user, p);
+        httpSession.setAttribute("user", user);
+        ModelAndView res = new ModelAndView("userShow", "user", httpSession.getAttribute("user"));
+        res.addObject("cat", "user");
+        errorService.manage(res, httpSession);
+        return res;
+    }
 }
