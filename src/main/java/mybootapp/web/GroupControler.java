@@ -56,11 +56,8 @@ public class GroupControler {
     public ModelAndView showGroup(Model model, @PathVariable("id") Long id, HttpSession httpSession) {
         logger.info((User) httpSession.getAttribute("user")+" : Requested Show Group of id : "+id);
         Optional<Group> group = dm.findGroup((User) httpSession.getAttribute("user"), id);      
-        if(group.isEmpty()) {
-        	//todo manage
-        }
-        Group gr = group.get();
-        Collection<Person> persons = gr.getPersons();
+        Group gr = (group.isPresent()) ? group.get() : null;
+        Collection<Person> persons = (gr != null) ? gr.getPersons() : null;
         ModelAndView res = new ModelAndView("groupShow", "gr", gr);
         res.addObject("persons", persons);
         res.addObject("user", (User) httpSession.getAttribute("user"));

@@ -143,6 +143,7 @@ public class UserControler {
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
         user.setBirthDay(sdf.parse(sd)); p.setBirthDay(user.getBirthDay());
         */
+        user.setBirthDay(user.getBirthDay()); p.setBirthDay(user.getBirthDay());
         dm.savePerson(user, p);
         httpSession.setAttribute("user", user);
         ModelAndView res = new ModelAndView("userShow", "user", httpSession.getAttribute("user"));

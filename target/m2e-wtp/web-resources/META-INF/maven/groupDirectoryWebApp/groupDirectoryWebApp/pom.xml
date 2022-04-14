@@ -27,7 +27,6 @@
 			</plugin>
 		</plugins>
 	</build>
-
 	<parent>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
@@ -35,7 +34,6 @@
 		<relativePath />
 		<!-- lookup parent from repository -->
 	</parent>
-
 	<dependencies>
 		<!-- ===== Partie Web ===== -->
 		<dependency>

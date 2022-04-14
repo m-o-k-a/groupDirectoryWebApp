@@ -19,7 +19,7 @@
 	<div class="navbar-collapse collapse w-100 order-1 order-md-0 dual-collapse">
 	    <ul class="navbar-nav mr-auto">
 	      <li class="nav-item">
-	        <a class=<c:choose><c:when test="${cat eq personsCat}">"nav-link active"</c:when><c:otherwise>"nav-link"</c:otherwise></c:choose> href="${personsPath}">Persons</a>
+	        <a class=<c:choose><c:when test="${cat eq personsCat}">"nav-link active"</c:when><c:otherwise>"nav-link"</c:otherwise></c:choose> href="${personsPath}">People</a>
 	      </li>
 	      <li class="nav-item">
 	        <a class=<c:choose><c:when test="${cat eq groupsCat}">"nav-link active"</c:when><c:otherwise>"nav-link"</c:otherwise></c:choose> href="${groupsPath}">Groups</a>

@@ -54,10 +54,7 @@ public class PersonControler {
     public ModelAndView showPerson(Model model, @PathVariable("id") Long id, HttpSession httpSession) {
         logger.info((User) httpSession.getAttribute("user")+" : Requested Show Person of id : "+id);
         Optional<Person> person = dm.findPerson((User) httpSession.getAttribute("user"), id);      
-        if(person.isEmpty()) {
-        	//todo manage
-        }
-        Person pr = person.get();
+        Person pr = (person.isPresent()) ? person.get() : null;
         ModelAndView res = new ModelAndView("personShow", "pr", pr);
         res.addObject("user", (User) httpSession.getAttribute("user"));
         res.addObject("cat", "persons");
