@@ -2,7 +2,7 @@
 
 <div class="container">
 	<div class="justify-content-md-center m-2 d-flex flex-column justify-content-center">
-		<a class="btn btn-outline-info my-2 my-sm-0 m-2 w-75 mx-auto" href="${listPerson}">--- Return to People List ---</a>
+		<a class="btn btn-outline-info my-2 my-sm-0 m-2 w-50 mx-auto" href="${listPerson}">--- Return to People List ---</a>
 		<hr class="mx-auto"/>
 		<c:choose>
 			<c:when test="${pr ne null}">

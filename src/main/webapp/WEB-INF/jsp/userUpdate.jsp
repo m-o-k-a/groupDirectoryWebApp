@@ -38,7 +38,7 @@
 		    <span class="input-group-text bg-info text-white border-info col-12 rounded" id="actions">Actions</span>
 		  </div>
 	  		<div class="btn-group my-2 my-sm-0 m-2 mx-auto" role="group" aria-label="Actions Group">
-				<button class="btn btn-outline-info" type="submit">Update Informations</button>
+				<button class="btn btn-outline-info" type="submit">Update</button>
 	  		</div>
 	  		<div class="btn-group my-2 my-sm-0 m-2 mx-auto" role="group" aria-label="Actions Group">
 				<a class="btn btn-outline-info" href="${showUser}">Cancel</a>
