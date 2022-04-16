@@ -31,4 +31,5 @@ public interface IDirectoryManager {
 	
 	Collection<Person> login(User user, String mailAddress, String password);	
 	boolean logout(User user);
+	void flush();
 }

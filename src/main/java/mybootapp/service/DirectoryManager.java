@@ -134,4 +134,10 @@ public class DirectoryManager implements IDirectoryManager {
 		personRepository.deleteAll();
 	}
 
+	@Override
+	public void flush() {
+		personRepository.flush();
+		groupRepository.flush();
+	}
+
 }

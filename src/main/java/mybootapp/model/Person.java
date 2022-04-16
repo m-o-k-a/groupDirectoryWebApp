@@ -64,7 +64,6 @@ public class Person implements Serializable {
     //@Column(name = "birth_day")
     private Date birthDay;
     
-    //TODO update if possible password field
     @Basic
     //@Column(name = "password", length = 400, nullable = false, unique = false)
     private String password;

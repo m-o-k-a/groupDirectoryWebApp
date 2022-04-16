@@ -12,6 +12,7 @@ import java.util.Set;
 import javax.transaction.Transactional;
 
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
@@ -41,10 +42,8 @@ public class TestSimpleSettlement {
 	@Autowired
 	GroupRepository groupRepository;
     
-	/*
-	 * Do not respect the single test guidelines but fuck JEE that shit ain't working 
-	 */
     @Test
+    @Disabled("Able test will purge the database")
     public void testSettlement() {
     	int size = 1000;
     	//test settlement
