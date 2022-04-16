@@ -37,30 +37,23 @@ public class TestSimpleSettlement {
     private SimpleSettlement ss;
     
 	@Autowired
-	PersonRepository personRepository;
+	DirectoryManager dm;
 	
-	@Autowired
-	GroupRepository groupRepository;
-    
     @Test
-    @Disabled("Able test will purge the database")
+    //@Disabled("Able test will purge the database")
     public void testSettlement() {
     	int size = 1000;
     	//test settlement
-    	personRepository.deleteAll();
-    	groupRepository.deleteAll();
-    	ss.settle(size, size);
-    	assertEquals(size, personRepository.count());
-    	assertEquals(size, groupRepository.count());
+    	dm.deleteAll();
     	
-    	//test association
-    	//ss.associate();
-    	//groupRepository.saveAll(ss.getGroups());
-    	//assertEquals(size, personRepository.count());
-    	//assertEquals(size, groupRepository.count());
-    	for(Group g : groupRepository.findAll()) {
+    	ss.settle(size, size);
+    	assertEquals(size, dm.getAmountOfPerson(null));
+    	assertEquals(size, dm.getAmountOfGroup(null));
+    	
+    	for(Group g :dm.findAllGroup(null)) {
     		long id = g.getId();
-    		int length = groupRepository.getById(id).getPersonsLazy().size();
+    		Optional<Group> opt_g = dm.findGroup(null, g.getId());
+    		int length = opt_g.get().getPersonsLazy().size();
     		assertEquals(g.getPersons().size(), length);
     	}
     }

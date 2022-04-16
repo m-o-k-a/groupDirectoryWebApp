@@ -62,8 +62,8 @@ public class MyControler {
     @PostConstruct
     @Transactional
     public void init() {
-    	if(dm.findAllGroup(null).size() == 0 || dm.findAllPerson(null).size() == 0) {
-    		settlement.settle(1000, 1000);
-    	}
+    	//If no more create-drop update this part
+    	dm.deleteAll();
+    	settlement.settle(1000, 1000);
     }
 }
