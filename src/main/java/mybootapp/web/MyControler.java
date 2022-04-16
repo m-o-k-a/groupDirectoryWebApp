@@ -62,6 +62,8 @@ public class MyControler {
     @PostConstruct
     @Transactional
     public void init() {
-    	settlement.settle(10, 10);
+    	if(dm.findAllGroup(null).size() == 0 || dm.findAllPerson(null).size() == 0) {
+    		settlement.settle(1000, 1000);
+    	}
     }
 }

@@ -132,19 +132,22 @@ public class UserControler {
     	User user = ((User) httpSession.getAttribute("user"));
     	if(user == null || user.getId() == null) return new ModelAndView("redirect:/");
         logger.info((User) httpSession.getAttribute("user")+" : Requested Updated itself");
-        Person p = new Person();
-        p.setId(user.getId());
-        user.setFirstName((String) result.getFieldValue("firstName")); p.setFirstName(user.getFirstName());
-        user.setLastName((String) result.getFieldValue("lastName")); p.setLastName(user.getLastName());
-        user.setMailAddress((String) result.getFieldValue("mailAddress")); p.setMailAddress(user.getMailAddress());
-        user.setWebAddress((String) result.getFieldValue("webAddress")); p.setWebAddress(user.getWebAddress());
-        /* todo fix date issues 
-        String sd = ((String) result.getFieldValue("birthDay")).replace('/', '-');
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-        user.setBirthDay(sdf.parse(sd)); p.setBirthDay(user.getBirthDay());
-        */
-        user.setBirthDay(user.getBirthDay()); p.setBirthDay(user.getBirthDay());
-        dm.savePerson(user, p);
+        Optional<Person> opt_p = dm.findPerson(user, user.getId());
+        if(opt_p.isPresent()) {
+        	Person p = opt_p.get();
+            user.setFirstName((String) result.getFieldValue("firstName")); p.setFirstName(user.getFirstName());
+            user.setLastName((String) result.getFieldValue("lastName")); p.setLastName(user.getLastName());
+            user.setMailAddress((String) result.getFieldValue("mailAddress")); p.setMailAddress(user.getMailAddress());
+            user.setWebAddress((String) result.getFieldValue("webAddress")); p.setWebAddress(user.getWebAddress());
+            /* todo fix date issues 
+            String sd = ((String) result.getFieldValue("birthDay")).replace('/', '-');
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+            user.setBirthDay(sdf.parse(sd)); p.setBirthDay(user.getBirthDay());
+            */
+            user.setBirthDay(user.getBirthDay()); p.setBirthDay(user.getBirthDay());
+            p.setPassword(p.getPassword());
+            dm.savePerson(user, p);
+        }
         httpSession.setAttribute("user", user);
         ModelAndView res = new ModelAndView("userShow", "user", httpSession.getAttribute("user"));
         res.addObject("cat", "user");
