@@ -3,6 +3,11 @@
 <div class="container">
 	<form:form method="POST" modelAttribute="person" class="justify-content-md-center m-2 d-flex flex-column justify-content-center">
        <form:errors path="*" cssClass="alert alert-danger" element="div" />
+   		<c:if test='${errorUpdateMailAddress eq true}'>
+		   	<div id="mailAddressError" class="alert alert-danger mx-auto w-75">
+		   		Requested Mail Already Exist
+		   	</div>
+		</c:if>
 		<div class="input-group m-2 w-75 mx-auto">
 		 	<div class="input-group-prepend col-5">
 			    <span class="input-group-text bg-info text-white border-info col-12 rounded" id="firstName">First Name</span>

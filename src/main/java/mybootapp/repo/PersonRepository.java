@@ -21,6 +21,10 @@ public interface PersonRepository extends JpaRepository<Person, Long> {
     Collection<Person> findByLastNameLike(String lastName);
     
     @Modifying
+    @Query("select p from Person p where p.mailAddress like ?1")
+    Collection<Person> findByMailAddress(String mailAddress);
+    
+    @Modifying
     @Query("select p from Person p where p.firstName like ?1 and p.lastName like ?2")
     Collection<Person> findByFirstNameLikeAndLastNameLike(String firstName, String lastName);
     

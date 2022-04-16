@@ -129,27 +129,35 @@ public class UserControler {
 	@RequestMapping(value = "/update", method = RequestMethod.POST)
     public ModelAndView updatePersonPost(Model model, HttpSession httpSession, @ModelAttribute User u, BindingResult result) throws ParseException {
     	model.addAttribute("person", new Person());
+        ModelAndView res = null;
     	User user = ((User) httpSession.getAttribute("user"));
     	if(user == null || user.getId() == null) return new ModelAndView("redirect:/");
         logger.info((User) httpSession.getAttribute("user")+" : Requested Updated itself");
         Optional<Person> opt_p = dm.findPerson(user, user.getId());
+        Collection<Person> opt_p2 = dm.findPersonByMailAddress(user, result.getFieldValue("mailAddress").toString());
         if(opt_p.isPresent()) {
-        	Person p = opt_p.get();
-            user.setFirstName((String) result.getFieldValue("firstName")); p.setFirstName(user.getFirstName());
-            user.setLastName((String) result.getFieldValue("lastName")); p.setLastName(user.getLastName());
-            user.setMailAddress((String) result.getFieldValue("mailAddress")); p.setMailAddress(user.getMailAddress());
-            user.setWebAddress((String) result.getFieldValue("webAddress")); p.setWebAddress(user.getWebAddress());
-            /* todo fix date issues 
-            String sd = ((String) result.getFieldValue("birthDay")).replace('/', '-');
-            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-            user.setBirthDay(sdf.parse(sd)); p.setBirthDay(user.getBirthDay());
-            */
-            user.setBirthDay(user.getBirthDay()); p.setBirthDay(user.getBirthDay());
-            p.setPassword(p.getPassword());
-            dm.savePerson(user, p);
+        	if(opt_p2.size() != 0 && opt_p2.iterator().next().getId() != user.getId()) {
+        		System.out.println("kiki");
+        		 httpSession.setAttribute("errorUpdateMailAddress", true);
+        	     res = new ModelAndView("userUpdate", "user", httpSession.getAttribute("user"));
+        	} else {
+            	Person p = opt_p.get();
+                user.setFirstName((String) result.getFieldValue("firstName")); p.setFirstName(user.getFirstName());
+                user.setLastName((String) result.getFieldValue("lastName")); p.setLastName(user.getLastName());
+                user.setMailAddress((String) result.getFieldValue("mailAddress")); p.setMailAddress(user.getMailAddress());
+                user.setWebAddress((String) result.getFieldValue("webAddress")); p.setWebAddress(user.getWebAddress());
+                /* todo fix date issues 
+                String sd = ((String) result.getFieldValue("birthDay")).replace('/', '-');
+                SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+                user.setBirthDay(sdf.parse(sd)); p.setBirthDay(user.getBirthDay());
+                */
+                user.setBirthDay(user.getBirthDay()); p.setBirthDay(user.getBirthDay());
+                p.setPassword(p.getPassword());
+                dm.savePerson(user, p);
+                res = new ModelAndView("userShow", "user", httpSession.getAttribute("user"));
+        	}
         }
         httpSession.setAttribute("user", user);
-        ModelAndView res = new ModelAndView("userShow", "user", httpSession.getAttribute("user"));
         res.addObject("cat", "user");
         errorService.manage(res, httpSession);
         return res;

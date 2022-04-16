@@ -50,7 +50,7 @@ public class Person implements Serializable {
     private String lastName;
     
     @Basic
-    //@Column(name = "mail_address", length = 200, nullable = false, unique = true)
+    @Column(unique = true)
     private String mailAddress;
     
     @Basic

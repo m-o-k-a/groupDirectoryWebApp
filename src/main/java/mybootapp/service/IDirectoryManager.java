@@ -13,8 +13,9 @@ public interface IDirectoryManager {
 	void reset();
 	
 	Optional<Person> findPerson(User user, long id);
-	Collection<Person>findAllPerson(User user);
-	Collection<Person>findPersonByName(User user, String firstName, String lastName);
+	Collection<Person> findAllPerson(User user);
+	Collection<Person> findPersonByName(User user, String firstName, String lastName);
+	Collection<Person> findPersonByMailAddress(User user, String mailAddress);
 	boolean savePerson(User user, Person p);
 	void saveAllPerson(User user, Collection<Person> p);
 	void removePerson(User user, Person p);

@@ -11,12 +11,20 @@ public class ErrorService {
 	
 	public void manage(ModelAndView model, HttpSession httpSession) {
 		signInError(model, httpSession);
+		updateMailAddressError(model, httpSession);
 	}
 
 	private void signInError(ModelAndView model, HttpSession httpSession) {
 		if(httpSession.getAttribute("errorSignIn") != null && ((boolean) httpSession.getAttribute("errorSignIn")) == true) {
 			 model.addObject("errorSignIn", true);
 			 httpSession.setAttribute("errorSignIn", false);
+		}
+	}
+	
+	private void updateMailAddressError(ModelAndView model, HttpSession httpSession) {
+		if(httpSession.getAttribute("errorUpdateMailAddress") != null && ((boolean) httpSession.getAttribute("errorUpdateMailAddress")) == true) {
+			 model.addObject("errorUpdateMailAddress", true);
+			 httpSession.setAttribute("errorUpdateMailAddress", false);
 		}
 	}
 

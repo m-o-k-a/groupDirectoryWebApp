@@ -56,6 +56,11 @@ public class DirectoryManager implements IDirectoryManager {
 	}
 	
 	@Override
+	public Collection<Person> findPersonByMailAddress(User user, String mailAddress) {
+		return personRepository.findByMailAddress(mailAddress);
+	}
+	
+	@Override
 	public boolean savePerson(User user, Person p) {
 		Person res = personRepository.save(p);
 		return (res != null);

@@ -1,0 +1,4 @@
+/*C12*/SET SCHEMA PUBLIC
+DELETE FROM PERSON_TABLE WHERE ID=3
+INSERT INTO PERSON_TABLE VALUES(3,'2022-04-16','FirstName2','LastName2','2@settlement.com','password2','2-settlement.com')
+COMMIT
